@@ -6,7 +6,7 @@
     <circles-start-scripts/>
 
     <!-- add your custom scripts here -->
-    <script src="js/lights-interaction.js"></script>
+
   </head>
   <body>
 
@@ -23,6 +23,7 @@
         <!-- add our music and audio here -->
 
         <!-- add our gltf models here-->
+        <a-asset-item id="roomLayout" src="assets/models/tablelessRoomsWDoors_gltf_export.glb" response-type="arraybuffer"/>
 
         <!-- loading navmesh. Following instructiosn from here: https://github.com/n5ro/aframe-extras/tree/master/src/pathfinding -->
        
@@ -36,24 +37,32 @@
       <!-- just creating an entity that connects many elements together -->
       <a-entity id="game_manager" lights-interactive></a-entity>
 
-      <!-- island 1, with some spawnpoints -->
-      <a-entity circles-checkpoint circles-spawnpoint position="-9.404 0.592 9.588"></a-entity>
-      <a-entity circles-checkpoint circles-spawnpoint position="-9.751 0.546 7.433"></a-entity>
-      <a-entity circles-checkpoint circles-spawnpoint position="-11.233 0.618 9.290"></a-entity>
+      <!-- room with some spawnpoints -->
+      <a-entity id="room"
+            position="3.5 -0.4 2.485"
+            rotation="0 0 0"
+            scale="2 2 2"
+            gltf-model="#roomLayout">
+      </a-entity>
 
 
-      <a-entity id="welcome_description" position="-13.171 0.899 9.197" rotation="0 0 0"
+      <a-entity circles-checkpoint circles-spawnpoint position="-8.79 0.592 9.588"></a-entity>
+      <a-entity circles-checkpoint circles-spawnpoint position="-0.87 0.592 9.841"></a-entity>
+      <a-entity circles-checkpoint circles-spawnpoint position="0.728 0.592 1.207"></a-entity>
+      <a-entity circles-checkpoint circles-spawnpoint position="6.275 0.592 1.108"></a-entity>
+
+      <a-entity id="welcome_description" position="-10.3 2 8.648" rotation="0 0 0"
                 circles-description=" title_text_front:Welcome!;
                                       title_text_back:Welcome!;
-                                      description_text_front:This is COMET Creations' 1950s inspired escape room VR experience!;
-                                      description_text_back:This is COMET Creations' 1950s inspired escape room VR experience!;
+                                      description_text_front:This is COMET Creations' 1950s medical lab inspired escape room VR experience!;
+                                      description_text_back:This is COMET Creations' 1950s medical lab inspired escape room VR experience!;
                                       lookAtCamera:true;
                                       "></a-entity>
 
       <!-- sky and lights -->
       <a-entity id="sunlight" position="0 20 0" rotation="40 0 0" 
-                light="type:directional; intensity:4; color:#d5e4f5; castShadow:false;"></a-entity>
-      <a-entity light="type:hemisphere; color:#FFFFFF; groundColor:#BCE2F4; intensity:3.0"></a-entity>
+                light="type:directional; intensity:1; color:#d5e4f5; castShadow:false;"></a-entity>
+      <a-entity light="type:hemisphere; color:#FFFFFF; groundColor:#BCE2F4; intensity:0.5"></a-entity>
 
       <a-entity id='skyBox'
                 rotation='0 200 0'
