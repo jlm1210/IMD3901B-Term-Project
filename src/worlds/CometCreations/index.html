@@ -6,9 +6,88 @@
     <circles-start-scripts/>
 
     <!-- add your custom scripts here -->
+    <link rel="stylesheet" href="css/styles.css">
 
   </head>
   <body>
+
+    <!--settings UI for after initial circlesXR UI-->
+    <div id="firstUI" class="settings-overlay">
+      <div class="center">
+        <button class="settings-button" onclick="nextUI();">SINGLEPLAYER</button>
+        <button class="settings-button" onclick="nextUI();">MULTIPLAYER</button>
+      </div>
+     </div>
+     
+     <div id="secondUI" class="settings-overlay">
+      <div class="center">
+         <h1>LANGUAGE</h1>
+           <div>
+           <input type="radio" name="lang" value="en" class="lang" checked/>
+           <label for="radio1">ENGLISH</label>
+           </div>
+   
+           <div>
+           <input type="radio" name="lang" value="fr" class="lang"/>
+           <label for="radio2">FRENCH</label>
+           </div>
+        <h1>OTHER ACCESSIBILITY OPTIONS HERE</h1>
+   
+        <button class="settings-button" onclick="closeUI();">CONTINUE</button>
+      </div>
+     </div>
+     
+    <script>
+      //global values
+      var userLang = "en";
+      var jsonFile = "./language/en.JSON";
+      var jsonData = "";
+
+      //this will setup singleplayer vs multiplayer
+      function nextUI(){
+        document.querySelector('#firstUI').style.display='none';
+        document.querySelector('#secondUI').style.display='block';
+      }
+
+      //this will setup accessibility settings
+      function closeUI(){
+        var languages = document.querySelectorAll(".lang");
+        for(let i=0; i < languages.length; i++){
+
+          //fetch the JSON file of the correct language
+          if(languages[i].checked === true){
+              userLang = languages[i].value;
+              var jsonFile = "./language/"+ userLang + ".JSON";
+              fetch(jsonFile)
+                .then((res) => {
+                    if (!res.ok) {
+                        throw new Error
+                            (`HTTP error! Status: ${res.status}`);
+                    }
+                    return res.json();
+                })
+                .then((data) => {
+                  jsonData = data;
+                  console.log(jsonData);
+                })
+                .catch((error) => 
+                       console.error("Unable to fetch data:", error));
+          }
+        }
+
+        window.setInterval(printy, 1000);
+
+        function printy(){
+          console.log(jsonData.HUBText.Welcome);
+          //setup text
+          const welcome = document.getElementById('welcome_description');
+          welcome.setAttribute('circles-description', {title_text_front:'Welcome!', description_text_front:`${jsonData.HUBText.Welcome}`, description_text_back:`${jsonData.HUBText.Welcome}`, lookAtCamera:true});
+        }
+
+        document.querySelector('#secondUI').style.display='none';
+      }
+
+    </script>
 
     <!-- this is used to create our enter UI that creates a 2D overlay to capture a user gesture for sound/mic access etc. -->
     <circles-start-ui/>
@@ -50,13 +129,7 @@
       <a-entity circles-checkpoint circles-spawnpoint position="0.728 0.592 1.207"></a-entity>
       <a-entity circles-checkpoint circles-spawnpoint position="6.275 0.592 1.108"></a-entity>
 
-      <a-entity id="welcome_description" position="-10.3 2 8.648" rotation="0 0 0"
-                circles-description=" title_text_front:Welcome!;
-                                      title_text_back:Welcome!;
-                                      description_text_front:This is COMET Creations' 1950s medical lab inspired escape room VR experience!;
-                                      description_text_back:This is COMET Creations' 1950s medical lab inspired escape room VR experience!;
-                                      lookAtCamera:true;
-                                      "></a-entity>
+      <a-entity id="welcome_description" position="-10.3 2 8.648" rotation="0 0 0"></a-entity>
 
       <!-- sky and lights -->
       <a-entity id="sunlight" position="0 20 0" rotation="40 0 0" 
