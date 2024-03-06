@@ -4,7 +4,8 @@
 
     <!-- Circles' head scripts [REQUIRED] -->
     <circles-start-scripts/>
-
+    <!-- Physics script goes after the Circles' head scripts [IMPORTANT]-->
+    <script src="/global/js/libs/aframe-physics-system.min.js"></script>
     <!-- add your custom scripts here -->
     <link rel="stylesheet" href="css/styles.css">
 
@@ -14,8 +15,8 @@
     <!--settings UI for after initial circlesXR UI-->
     <div id="firstUI" class="settings-overlay">
       <div class="center">
-        <button class="settings-button" onclick="nextUI();">SINGLEPLAYER</button>
-        <button class="settings-button" onclick="nextUI();">MULTIPLAYER</button>
+        <button class="settings-button" onclick="nextUI(1);">SINGLEPLAYER</button>
+        <button class="settings-button" onclick="nextUI(2);">MULTIPLAYER</button>
       </div>
      </div>
      
@@ -42,11 +43,39 @@
       var userLang = "en";
       var jsonFile = "./language/en.JSON";
       var jsonData = "";
+      var numGroups = 1;
+      var isMultiPlayer = false;
+      const maxMultiPlayers = 4;
 
       //this will setup singleplayer vs multiplayer
-      function nextUI(){
+      function nextUI(flag){
         document.querySelector('#firstUI').style.display='none';
         document.querySelector('#secondUI').style.display='block';
+        if(flag===1){
+          console.log("singleplayer");
+          isMultiPlayer = false;
+          //don't need to do anything as default places each user into their own instance of the project
+        } else {
+          console.log("multiplayer");
+          isMultiPlayer = true;
+          //get communication socket
+          CIRCLES.getCirclesWebsocket();
+
+          let URL = window.location.href;
+          let newGrp = "group" + numGroups;
+         // console.log(newGrp);
+          URL = URL.replace("explore", newGrp);
+          //console.log(URL);
+
+          //send user to new group
+          window.history.pushState({urlPath:URL},"",URL);
+          //mMAKE THIS ONLY ACCEPT 4 USERS AT MAXIMUM
+
+          console.log(CIRCLES.getCirclesWorldName());
+          console.log( CIRCLES.getCirclesGroupName());
+          console.log(CIRCLES.getCirclesUserName());
+
+        }
       }
 
       //this will setup accessibility settings
@@ -68,7 +97,7 @@
                 })
                 .then((data) => {
                   jsonData = data;
-                  console.log(jsonData);
+                 // console.log(jsonData);
                 })
                 .catch((error) => 
                        console.error("Unable to fetch data:", error));
@@ -85,6 +114,21 @@
         }
 
         document.querySelector('#secondUI').style.display='none';
+
+        //apply a dynamic-body on avatars
+        var myAvatar = CIRCLES.getAvatarElement();
+        var avatarBody = document.querySelector('.user_body');
+        avatarBody.setAttribute('static-body', {shape: 'box'});
+        console.log(myAvatar);
+        
+        //collsion of avatar body
+        var avatarBody = document.querySelector('.user_body');
+        avatarBody.addEventListener('collide', function (e) {
+
+          console.log(e.detail.body.el);   
+
+        });
+
       }
 
     </script>
@@ -93,7 +137,7 @@
     <circles-start-ui/>
 
     <!-- a-scene with 'circles-properties' component [REQUIRED] -->
-    <a-scene circles_scene_properties>
+    <a-scene circles_scene_properties physics="debug: true">
       <a-assets>
         <!-- add your assets here. Note that you can use relative links or absolute paths to your world -->
         <!-- credit: HDRMaps @ https://hdrmaps.com/above-the-clouds/ -->
@@ -124,6 +168,18 @@
             gltf-model="#roomLayout">
       </a-entity>
 
+      <!--ground-->
+      <a-entity static-body class="ground" 
+              geometry="primitive:plane; width:100; height:100;"
+              material="color: white;"
+              position="0 0.49 0"
+              rotation="-90 0 0">
+      </a-entity>
+
+      <!--room trigger box-->
+      <a-entity static-body id="labTrigger" position="0.111 1.498 4.067" scale="2 2 1" geometry="primitive:box; width:1; height: 1; depth:1;" material="opacity: 0;"></a-entity>
+
+      <!--teleport points-->
       <a-entity circles-checkpoint circles-spawnpoint position="-8.79 0.592 9.588"></a-entity>
       <a-entity circles-checkpoint position="-0.87 0.592 9.841"></a-entity>
       <a-entity circles-checkpoint position="0.728 0.592 1.207"></a-entity>
