@@ -146,7 +146,7 @@
         <!-- add our music and audio here -->
 
         <!-- add our gltf models here-->
-        <a-asset-item id="roomLayout" src="assets/models/finalTermProjectRoomLayouts.gltf" response-type="arraybuffer"/>
+        <a-asset-item id="roomLayout" src="assets/models/ProjectRoomLayoutsFinal.gltf" response-type="arraybuffer"/>
 
         <!-- loading navmesh. Following instructiosn from here: https://github.com/n5ro/aframe-extras/tree/master/src/pathfinding -->
        
@@ -169,12 +169,12 @@
       </a-entity>
 
       <!--ground-->
-      <a-entity static-body class="ground" 
+      <!--<a-entity static-body class="ground" 
               geometry="primitive:plane; width:100; height:100;"
               material="color: white;"
               position="0 0.49 0"
               rotation="-90 0 0">
-      </a-entity>
+      </a-entity>-->
 
       <!--room trigger box-->
       <a-entity static-body id="labTrigger" position="0.111 1.498 4.067" scale="2 2 1" geometry="primitive:box; width:1; height: 1; depth:1;" material="opacity: 0;"></a-entity>
