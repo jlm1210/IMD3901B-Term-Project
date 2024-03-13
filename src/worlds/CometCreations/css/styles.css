@@ -15,6 +15,18 @@
   #secondUI{
   display: none;
   }
+
+  #gameUI{
+    position: fixed;
+    display: none;
+    background-color: green;
+    z-index: 1;
+    font-size: 3em;
+  }
+
+  #you {
+    background-color: white;
+  }
   
   .center {
     margin: 0;

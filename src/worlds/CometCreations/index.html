@@ -37,6 +37,17 @@
         <button class="settings-button" onclick="closeUI();">CONTINUE</button>
       </div>
      </div>
+
+    <!--game UI-->
+    <div id="gameUI">
+      <div>
+        <h3 id="info">KNOWLEDGE</h3>
+        <div id="team">
+          <h3>PLAYERS</h3>
+          <h5 id="you">user</h5>
+        </div>
+      </div>
+     </div>
      
     <script>
       //global values
@@ -46,6 +57,7 @@
       var numGroups = 1;
       var isMultiPlayer = false;
       const maxMultiPlayers = 4;
+      var objectKnowledge = [];
 
       //this will setup singleplayer vs multiplayer
       function nextUI(flag){
@@ -63,17 +75,15 @@
 
           let URL = window.location.href;
           let newGrp = "group" + numGroups;
-         // console.log(newGrp);
           URL = URL.replace("explore", newGrp);
-          //console.log(URL);
 
           //send user to new group
           window.history.pushState({urlPath:URL},"",URL);
           //mMAKE THIS ONLY ACCEPT 4 USERS AT MAXIMUM
 
-          console.log(CIRCLES.getCirclesWorldName());
-          console.log( CIRCLES.getCirclesGroupName());
-          console.log(CIRCLES.getCirclesUserName());
+          //console.log(CIRCLES.getCirclesWorldName());
+          //console.log( CIRCLES.getCirclesGroupName());
+          //console.log(CIRCLES.getCirclesUserName());
 
         }
       }
@@ -107,27 +117,53 @@
         window.setInterval(printy, 1000);
 
         function printy(){
-          console.log(jsonData.HUBText.Welcome);
+          //.log(jsonData.HUBText.Welcome);
           //setup text
           const welcome = document.getElementById('welcome_description');
           welcome.setAttribute('circles-description', {title_text_front:'Welcome!', description_text_front:`${jsonData.HUBText.Welcome}`, description_text_back:`${jsonData.HUBText.Welcome}`, lookAtCamera:true});
         }
 
+        //switch visible overlays
         document.querySelector('#secondUI').style.display='none';
+        document.querySelector('#gameUI').style.display='block';
 
-        //apply a dynamic-body on avatars
-        var myAvatar = CIRCLES.getAvatarElement();
-        var avatarBody = document.querySelector('.user_body');
-        avatarBody.setAttribute('static-body', {shape: 'box'});
-        console.log(myAvatar);
-        
-        //collsion of avatar body
-        var avatarBody = document.querySelector('.user_body');
-        avatarBody.addEventListener('collide', function (e) {
 
-          console.log(e.detail.body.el);   
+        //make a unique colour for each avatar
+        var rCol = 0;
+        var gCol = 255;
+        var bCol = 0;
 
-        });
+        if(CIRCLES.isReady()){
+          var avatar = CIRCLES.getAvatarElement();
+
+          rCol = Math.floor(Math.random() * 255);
+          gCol = Math.floor(Math.random() * 255);
+          bCol = Math.floor(Math.random() * 255);
+
+          //2 and 3rd children are head and body
+          avatar.children[2].setAttribute('circles-color', {alpha: 1, color:`rgb(${rCol}, ${gCol}, ${bCol})`});
+          avatar.children[3].setAttribute('circles-color', {alpha: 1, color:`rgb(${rCol}, ${gCol}, ${bCol})`});
+
+          var UIavatar = document.querySelector('#you').innerHTML = CIRCLES.getCirclesUserName();
+          document.querySelector('#you').style.backgroundColor = `rgb(${rCol}, ${gCol}, ${bCol})`;
+        }
+
+        // Wait for the scene to load
+       // document.querySelector('a-scene').addEventListener('loaded', function () {
+          // Attach an event listener to the player avatar
+          var avatarBody = document.querySelector('.user_body');
+          avatarBody.setAttribute('sensor', {});
+          console.log(avatarBody);
+
+          // Add a collision event listener to the avatar
+          avatarBody.addEventListener('collide', function (event) {
+            console.log("collided");
+            // Check if the collision was with the static object
+            if (event.detail.body.el.id === 'labTrigger') {
+              console.log('Avatar collided with the static object!');
+            }
+          });
+       // });
 
       }
 
@@ -137,7 +173,7 @@
     <circles-start-ui/>
 
     <!-- a-scene with 'circles-properties' component [REQUIRED] -->
-    <a-scene circles_scene_properties physics="debug: true">
+    <a-scene circles_scene_properties physics="debug: true; gravity: 0 0 0;">
       <a-assets>
         <!-- add your assets here. Note that you can use relative links or absolute paths to your world -->
         <!-- credit: HDRMaps @ https://hdrmaps.com/above-the-clouds/ -->
@@ -146,7 +182,7 @@
         <!-- add our music and audio here -->
 
         <!-- add our gltf models here-->
-        <a-asset-item id="roomLayout" src="assets/models/ProjectRoomLayoutsFinal.gltf" response-type="arraybuffer"/>
+        <a-asset-item id="roomLayout" src="assets/models/Room/BothRoomsWTexture4.gltf" response-type="arraybuffer"/>
 
         <!-- loading navmesh. Following instructiosn from here: https://github.com/n5ro/aframe-extras/tree/master/src/pathfinding -->
        
@@ -167,14 +203,6 @@
             scale="2 2 2"
             gltf-model="#roomLayout">
       </a-entity>
-
-      <!--ground-->
-      <!--<a-entity static-body class="ground" 
-              geometry="primitive:plane; width:100; height:100;"
-              material="color: white;"
-              position="0 0.49 0"
-              rotation="-90 0 0">
-      </a-entity>-->
 
       <!--room trigger box-->
       <a-entity static-body id="labTrigger" position="0.111 1.498 4.067" scale="2 2 1" geometry="primitive:box; width:1; height: 1; depth:1;" material="opacity: 0;"></a-entity>
