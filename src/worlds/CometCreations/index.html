@@ -44,7 +44,6 @@
         <h3 id="info">KNOWLEDGE</h3>
         <div id="team">
           <h3>PLAYERS</h3>
-          <h5 id="you">user</h5>
         </div>
       </div>
      </div>
@@ -58,6 +57,7 @@
       var isMultiPlayer = false;
       const maxMultiPlayers = 4;
       var objectKnowledge = [];
+      var numPlayers = 1;
 
       //this will setup singleplayer vs multiplayer
       function nextUI(flag){
@@ -66,7 +66,13 @@
         if(flag===1){
           console.log("singleplayer");
           isMultiPlayer = false;
+
+          let URL = window.location.href;
+          if(URL.includes("group1")){
+            URL = URL.replace("group1", "explore");
+          }
           //don't need to do anything as default places each user into their own instance of the project
+          window.history.pushState({urlPath:URL},"",URL);
         } else {
           console.log("multiplayer");
           isMultiPlayer = true;
@@ -79,12 +85,6 @@
 
           //send user to new group
           window.history.pushState({urlPath:URL},"",URL);
-          //mMAKE THIS ONLY ACCEPT 4 USERS AT MAXIMUM
-
-          //console.log(CIRCLES.getCirclesWorldName());
-          //console.log( CIRCLES.getCirclesGroupName());
-          //console.log(CIRCLES.getCirclesUserName());
-
         }
       }
 
@@ -134,36 +134,66 @@
         var bCol = 0;
 
         if(CIRCLES.isReady()){
-          var avatar = CIRCLES.getAvatarElement();
 
-          rCol = Math.floor(Math.random() * 255);
-          gCol = Math.floor(Math.random() * 255);
-          bCol = Math.floor(Math.random() * 255);
+          window.setInterval(avatarUI ,1000);        
 
-          //2 and 3rd children are head and body
-          avatar.children[2].setAttribute('circles-color', {alpha: 1, color:`rgb(${rCol}, ${gCol}, ${bCol})`});
-          avatar.children[3].setAttribute('circles-color', {alpha: 1, color:`rgb(${rCol}, ${gCol}, ${bCol})`});
-
-          var UIavatar = document.querySelector('#you').innerHTML = CIRCLES.getCirclesUserName();
-          document.querySelector('#you').style.backgroundColor = `rgb(${rCol}, ${gCol}, ${bCol})`;
         }
 
-        // Wait for the scene to load
-       // document.querySelector('a-scene').addEventListener('loaded', function () {
+        function avatarUI(){
+            //get all avatars in the group to show in the UI
+            var allAvatars = CIRCLES.getNAFAvatarElements();
+
+            //if another player has joined, get the UI again
+            if(allAvatars.length != numPlayers){
+
+              for(let i = numPlayers-1; i < allAvatars.length; i++){
+
+                rCol = Math.floor(Math.random() * 255);
+                gCol = Math.floor(Math.random() * 255);
+                bCol = Math.floor(Math.random() * 255);
+
+                //2 and 3rd children are head and body
+                allAvatars[i].children[2].setAttribute('circles-color', {alpha: 1, color:`rgb(${rCol}, ${gCol}, ${bCol})`});
+                allAvatars[i].children[3].setAttribute('circles-color', {alpha: 1, color:`rgb(${rCol}, ${gCol}, ${bCol})`});
+
+                var playerText = document.createElement("h5");
+                playerText.innerHTML = `Player ${i+1}`;
+                playerText.style.backgroundColor = `rgb(${rCol}, ${gCol}, ${bCol})`;
+                playerText.setAttribute('id',`player${i}`);
+                document.querySelector("#team").appendChild(playerText);
+              }
+              numPlayers = allAvatars.length;
+            }
+          }
+
+
           // Attach an event listener to the player avatar
           var avatarBody = document.querySelector('.user_body');
-          avatarBody.setAttribute('sensor', {});
-          console.log(avatarBody);
+          avatarBody.setAttribute('trigger', {});
 
-          // Add a collision event listener to the avatar
-          avatarBody.addEventListener('collide', function (event) {
-            console.log("collided");
-            // Check if the collision was with the static object
-            if (event.detail.body.el.id === 'labTrigger') {
-              console.log('Avatar collided with the static object!');
-            }
-          });
-       // });
+          //probably not the greatest way to do this
+          AFRAME.registerComponent('trigger', {
+          init: function () {
+            var el = this.el;
+            var box = document.querySelector('#labTrigger');
+            
+            // // Check for intersection every 100 milliseconds
+            // setInterval(function () {
+            //     // Get the positions and dimensions of the entities
+            //     var triggerBoxPos = box.object3D.position;
+            //     var triggerBoxSize = box.getAttribute('scale');
+            //     var avatarPos = avatar.object3D.position;
+            //     var avatarSize = avatar.getAttribute('radius');
+                
+            //     // Check for collision
+            //     if (Math.abs(triggerBoxPos.x - avatarPos.x) < (triggerBoxSize.x / 2 + avatarSize) &&
+            //         Math.abs(triggerBoxPos.y - avatarPos.y) < (triggerBoxSize.y / 2 + avatarSize) &&
+            //         Math.abs(triggerBoxPos.z - avatarPos.z) < (triggerBoxSize.z / 2 + avatarSize)) {
+            //         console.log('Collision detected!');
+            //     }
+            // }, 100);
+          }
+        });
 
       }
 
@@ -205,7 +235,7 @@
       </a-entity>
 
       <!--room trigger box-->
-      <a-entity static-body id="labTrigger" position="0.111 1.498 4.067" scale="2 2 1" geometry="primitive:box; width:1; height: 1; depth:1;" material="opacity: 0;"></a-entity>
+      <a-entity id="labTrigger" position="0.111 1.498 4.067" scale="2 2 1" geometry="primitive:box; width:1; height: 1; depth:1;" material="opacity: 0;"></a-entity>
 
       <!--teleport points-->
       <a-entity circles-checkpoint circles-spawnpoint position="-8.79 0.592 9.588"></a-entity>
