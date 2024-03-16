@@ -52,3 +52,9 @@
     background-color: #238773;
     color: white;
   }
+
+  #loading-animation {
+    display: none;
+    width: 80%;
+    height: 80%;
+  }

@@ -22,6 +22,7 @@
      
      <div id="secondUI" class="settings-overlay">
       <div class="center">
+        <img id="loading-animation" src="https://cdn.glitch.com/4d85200f-900f-4f4a-b950-82c4af80c1fb%2Floader.gif?v=1611262527887">
          <h1>LANGUAGE</h1>
            <div>
            <input type="radio" name="lang" value="en" class="lang" checked/>
@@ -57,7 +58,7 @@
       var isMultiPlayer = false;
       const maxMultiPlayers = 4;
       var objectKnowledge = [];
-      var numPlayers = 1;
+      var numPlayers = 0;
 
       //this will setup singleplayer vs multiplayer
       function nextUI(flag){
@@ -112,8 +113,17 @@
                 .catch((error) => 
                        console.error("Unable to fetch data:", error));
           }
-        }
+        } 
+        
+       //------------MAIN GAME LOOP----------------
+       //wait for circles to load in properly
+      if(CIRCLES.isReady()){
 
+        //switch visible overlays
+        document.querySelector('#secondUI').style.display='none';
+        document.querySelector('#gameUI').style.display='block';
+
+        //get welcome text
         window.setInterval(printy, 1000);
 
         function printy(){
@@ -123,21 +133,12 @@
           welcome.setAttribute('circles-description', {title_text_front:'Welcome!', description_text_front:`${jsonData.HUBText.Welcome}`, description_text_back:`${jsonData.HUBText.Welcome}`, lookAtCamera:true});
         }
 
-        //switch visible overlays
-        document.querySelector('#secondUI').style.display='none';
-        document.querySelector('#gameUI').style.display='block';
-
-
         //make a unique colour for each avatar
         var rCol = 0;
         var gCol = 255;
         var bCol = 0;
 
-        if(CIRCLES.isReady()){
-
-          window.setInterval(avatarUI ,1000);        
-
-        }
+        window.setInterval(avatarUI ,1000);        
 
         function avatarUI(){
             //get all avatars in the group to show in the UI
@@ -146,7 +147,7 @@
             //if another player has joined, get the UI again
             if(allAvatars.length != numPlayers){
 
-              for(let i = numPlayers-1; i < allAvatars.length; i++){
+              for(let i = numPlayers; i < allAvatars.length; i++){
 
                 rCol = Math.floor(Math.random() * 255);
                 gCol = Math.floor(Math.random() * 255);
@@ -161,41 +162,41 @@
                 playerText.style.backgroundColor = `rgb(${rCol}, ${gCol}, ${bCol})`;
                 playerText.setAttribute('id',`player${i}`);
                 document.querySelector("#team").appendChild(playerText);
+
               }
               numPlayers = allAvatars.length;
             }
           }
 
 
-          // Attach an event listener to the player avatar
-          var avatarBody = document.querySelector('.user_body');
-          avatarBody.setAttribute('trigger', {});
+          var currAvatar = CIRCLES.getAvatarRigElement();
+          currAvatar.setAttribute('trigger', {});
 
           //probably not the greatest way to do this
           AFRAME.registerComponent('trigger', {
           init: function () {
             var el = this.el;
-            var box = document.querySelector('#labTrigger');
+            var pos = el.getAttribute('position');
+            var boxPos = document.querySelector('#labTrigger').getAttribute('position');
+            console.log(pos);
+            console.log(boxPos);
             
-            // // Check for intersection every 100 milliseconds
-            // setInterval(function () {
-            //     // Get the positions and dimensions of the entities
-            //     var triggerBoxPos = box.object3D.position;
-            //     var triggerBoxSize = box.getAttribute('scale');
-            //     var avatarPos = avatar.object3D.position;
-            //     var avatarSize = avatar.getAttribute('radius');
-                
-            //     // Check for collision
-            //     if (Math.abs(triggerBoxPos.x - avatarPos.x) < (triggerBoxSize.x / 2 + avatarSize) &&
-            //         Math.abs(triggerBoxPos.y - avatarPos.y) < (triggerBoxSize.y / 2 + avatarSize) &&
-            //         Math.abs(triggerBoxPos.z - avatarPos.z) < (triggerBoxSize.z / 2 + avatarSize)) {
-            //         console.log('Collision detected!');
-            //     }
-            // }, 100);
+            // Check for intersection every 100 milliseconds
+            setInterval(function () {
+
+                if(pos.z < boxPos.z){
+                  console.log("in the room");
+                }
+
+            }, 100);
           }
         });
-
+      } else {
+        document.querySelector('#loading-animation').style.display='block';
       }
+
+    }
+
 
     </script>
 
@@ -235,7 +236,7 @@
       </a-entity>
 
       <!--room trigger box-->
-      <a-entity id="labTrigger" position="0.111 1.498 4.067" scale="2 2 1" geometry="primitive:box; width:1; height: 1; depth:1;" material="opacity: 0;"></a-entity>
+      <a-entity id="labTrigger" position="0.111 1.498 5.411" scale="2 2 1" geometry="primitive:box; width:1; height: 1; depth:1;" material="opacity: 0;"></a-entity>
 
       <!--teleport points-->
       <a-entity circles-checkpoint circles-spawnpoint position="-8.79 0.592 9.588"></a-entity>
