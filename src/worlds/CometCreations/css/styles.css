@@ -1,6 +1,5 @@
 .settings-overlay {
     position: fixed;
-    display: block;
     width: 100%;
     height: 100%;
     top: 0;
@@ -12,8 +11,12 @@
     cursor: pointer;
   }
   
-  #secondUI{
+  #secondUI {
   display: none;
+  }
+
+  #firstUI{
+    display: block;
   }
 
   #gameUI{

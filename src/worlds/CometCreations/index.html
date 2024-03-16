@@ -59,33 +59,41 @@
       const maxMultiPlayers = 4;
       var objectKnowledge = [];
       var numPlayers = 0;
+      var usersInRoom = [];
+
+
+      window.onload = (event) => {
+        console.log("page is fully loaded");
+        //only show setup screens once
+        if(!window.location.href.includes("explore")){
+          document.querySelector('#firstUI').style.display='none';
+          document.querySelector('#secondUI').style.display='block';
+          console.log(isMultiPlayer);
+        } 
+      };
+      
 
       //this will setup singleplayer vs multiplayer
       function nextUI(flag){
         document.querySelector('#firstUI').style.display='none';
-        document.querySelector('#secondUI').style.display='block';
         if(flag===1){
           console.log("singleplayer");
           isMultiPlayer = false;
+          document.querySelector('#secondUI').style.display='block';
 
-          let URL = window.location.href;
-          if(URL.includes("group1")){
-            URL = URL.replace("group1", "explore");
-          }
-          //don't need to do anything as default places each user into their own instance of the project
-          window.history.pushState({urlPath:URL},"",URL);
         } else {
           console.log("multiplayer");
+          document.querySelector('#secondUI').style.display='block';
           isMultiPlayer = true;
-          //get communication socket
-          CIRCLES.getCirclesWebsocket();
 
           let URL = window.location.href;
           let newGrp = "group" + numGroups;
           URL = URL.replace("explore", newGrp);
 
           //send user to new group
-          window.history.pushState({urlPath:URL},"",URL);
+          window.location.href = URL;
+
+          console.log(CIRCLES.getCirclesGroupName());
         }
       }
 
@@ -127,7 +135,6 @@
         window.setInterval(printy, 1000);
 
         function printy(){
-          //.log(jsonData.HUBText.Welcome);
           //setup text
           const welcome = document.getElementById('welcome_description');
           welcome.setAttribute('circles-description', {title_text_front:'Welcome!', description_text_front:`${jsonData.HUBText.Welcome}`, description_text_back:`${jsonData.HUBText.Welcome}`, lookAtCamera:true});
@@ -145,7 +152,7 @@
             var allAvatars = CIRCLES.getNAFAvatarElements();
 
             //if another player has joined, get the UI again
-            if(allAvatars.length != numPlayers){
+            if(allAvatars.length > numPlayers){
 
               for(let i = numPlayers; i < allAvatars.length; i++){
 
@@ -165,8 +172,14 @@
 
               }
               numPlayers = allAvatars.length;
+            } else if(allAvatars.length < numPlayers) {
+              var UI = document.querySelector("#team");
+              UI.removeChild(UI.lastChild);
+              numPlayers = allAvatars.length;
             }
           }
+
+          console.log(CIRCLES.getCirclesGroupName());
 
 
           var currAvatar = CIRCLES.getAvatarRigElement();
@@ -185,7 +198,8 @@
             setInterval(function () {
 
                 if(pos.z < boxPos.z){
-                  console.log("in the room");
+                  //console.log("in the room");
+                  usersInRoom.push(el);
                 }
 
             }, 100);
@@ -204,7 +218,7 @@
     <circles-start-ui/>
 
     <!-- a-scene with 'circles-properties' component [REQUIRED] -->
-    <a-scene circles_scene_properties physics="debug: true; gravity: 0 0 0;">
+    <a-scene circles_scene_properties networked-scene="room: explore; connectOnLoad: false;">
       <a-assets>
         <!-- add your assets here. Note that you can use relative links or absolute paths to your world -->
         <!-- credit: HDRMaps @ https://hdrmaps.com/above-the-clouds/ -->
@@ -212,8 +226,9 @@
 
         <!-- add our music and audio here -->
 
-        <!-- add our gltf models here-->
+        <!-- add our gltf models here
         <a-asset-item id="roomLayout" src="assets/models/Room/BothRoomsWTexture4.gltf" response-type="arraybuffer"/>
+        -->
 
         <!-- loading navmesh. Following instructiosn from here: https://github.com/n5ro/aframe-extras/tree/master/src/pathfinding -->
        
@@ -227,13 +242,14 @@
       <!-- just creating an entity that connects many elements together -->
       <a-entity id="game_manager" lights-interactive></a-entity>
 
-      <!-- room with some checkpoints -->
+      <!-- room with some checkpoints 
       <a-entity id="room"
             position="3.5 -0.4 2.485"
             rotation="0 0 0"
             scale="2 2 2"
             gltf-model="#roomLayout">
       </a-entity>
+      -->
 
       <!--room trigger box-->
       <a-entity id="labTrigger" position="0.111 1.498 5.411" scale="2 2 1" geometry="primitive:box; width:1; height: 1; depth:1;" material="opacity: 0;"></a-entity>
