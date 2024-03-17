@@ -1,0 +1,188 @@
+{
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 3504,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 1103,
+      "max": [
+        2.82560968399048,
+        18.4785079956055,
+        6.10726547241211
+      ],
+      "min": [
+        -0.461257576942444,
+        0.0209980010986328,
+        -6.10726547241211
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 1103,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 1103,
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5126,
+      "count": 1103,
+      "type": "VEC2"
+    }
+  ],
+  "asset": {
+    "generator": "Adobe Substance 3D Painter 9.1.2",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 14016,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 13236,
+      "byteOffset": 14016,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 13236,
+      "byteOffset": 27252,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 17648,
+      "byteOffset": 40488,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 8824,
+      "byteOffset": 58136,
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 66960,
+      "uri": "medicalDoor.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "MedicalDoor_baseColor.png"
+    },
+    {
+      "uri": "MedicalDoor_occlusionRoughnessMetallic.png"
+    },
+    {
+      "uri": "MedicalDoor_normal.png"
+    }
+  ],
+  "materials": [
+    {
+      "alphaMode": "OPAQUE",
+      "name": "MedicalDoor",
+      "normalTexture": {
+        "index": 2
+      },
+      "occlusionTexture": {
+        "index": 1
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicRoughnessTexture": {
+          "index": 1
+        }
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "handle4",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 2,
+            "POSITION": 1,
+            "TANGENT": 3,
+            "TEXCOORD_0": 4
+          },
+          "indices": 0,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "name": "RootNode",
+      "scale": [
+        0.00999999977648258,
+        0.00999999977648258,
+        0.00999999977648258
+      ]
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "handle4"
+    },
+    {
+      "mesh": 0,
+      "name": "handle4"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9985,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    }
+  ]
+}
