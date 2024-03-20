@@ -13,31 +13,54 @@
   <body>
 
     <!--settings UI for after initial circlesXR UI-->
-    <div id="firstUI" class="settings-overlay">
+     <div id="firstUI" class="settings-overlay">
       <div class="center">
+        <h1>INGENIUM CENTRE<br> VR EXPERIENCE</h1>
         <button class="settings-button" onclick="nextUI(1);">SINGLEPLAYER</button>
+        <br>
         <button class="settings-button" onclick="nextUI(2);">MULTIPLAYER</button>
       </div>
-     </div>
-     
+    </div>  
+
      <div id="secondUI" class="settings-overlay">
       <div class="center">
-        <img id="loading-animation" src="https://cdn.glitch.com/4d85200f-900f-4f4a-b950-82c4af80c1fb%2Floader.gif?v=1611262527887">
-         <h1>LANGUAGE</h1>
-           <div>
-           <input type="radio" name="lang" value="en" class="lang" checked/>
-           <label for="radio1">ENGLISH</label>
+        <div class="language">
+           <h1>LANGUAGE</h1>
+           <div class="radioMenu">
+            <label class="radioButton">
+              <input type="radio" name="lang" value="en" checked/>
+              <span class="lang"></span>
+              <span for="radio1">English</span>
+            </label>  
+              <label class="radioButton">
+               <input type="radio" name="lang" value="fr"/>
+               <span class="lang"></span>
+               <span for="radio2">French</span>
+              </label>
            </div>
-   
-           <div>
-           <input type="radio" name="lang" value="fr" class="lang"/>
-           <label for="radio2">FRENCH</label>
-           </div>
-        <h1>OTHER ACCESSIBILITY OPTIONS HERE</h1>
-   
+        </div>
+        <div class="speech">
+          <h1><br>TEXT TO SPEECH</h1>
+          <div class="switchMenu">
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+        <div class="color">
+          <h1><br>COLOR OPTIONS</h1>
+          <div class="switchMenu">
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
         <button class="settings-button" onclick="closeUI();">CONTINUE</button>
       </div>
-     </div>
+    </div>
+
 
     <!--game UI-->
     <div id="gameUI">
@@ -68,7 +91,6 @@
         if(!window.location.href.includes("explore")){
           document.querySelector('#firstUI').style.display='none';
           document.querySelector('#secondUI').style.display='block';
-          console.log(isMultiPlayer);
         } 
       };
       
@@ -179,9 +201,6 @@
             }
           }
 
-          console.log(CIRCLES.getCirclesGroupName());
-
-
           var currAvatar = CIRCLES.getAvatarRigElement();
           currAvatar.setAttribute('trigger', {});
 
@@ -191,14 +210,11 @@
             var el = this.el;
             var pos = el.getAttribute('position');
             var boxPos = document.querySelector('#labTrigger').getAttribute('position');
-            console.log(pos);
-            console.log(boxPos);
             
             // Check for intersection every 100 milliseconds
             setInterval(function () {
 
                 if(pos.z < boxPos.z){
-                  //console.log("in the room");
                   usersInRoom.push(el);
                 }
 
