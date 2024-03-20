@@ -1,14 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+  margin: 0
+}
+
+h1 {
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  color: teal
+}
+
 .settings-overlay {
     position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100vw;
+    height: 100vh;
     background-color: white;
     z-index: 1;
     cursor: pointer;
+    align-items: center;
+    justify-content: center;
   }
   
   #secondUI {
@@ -38,22 +48,30 @@
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Roboto", sans-serif;
+    padding: 100px;
+    border: 10px solid darkslategray;
+    border-radius: 20px;
+    max-width: 900px;
   }
   
   .settings-button {
-    width: 100%;
-    background-color: #56e3c7;
-    color: #238773;
-    padding: 30px 20px;
-    margin: 8px 10px 8px 10px;
-    border: 5px solid #ffffff;
-    border-radius: 20px;
     cursor: pointer;
+    border-radius: 12px;
+    padding: 12px 28px;
+    background-color: #e7e7e7; color: black;
+    transition-duration: 0.4s;
+    font-family: "Roboto", sans-serif;
+    width: 150px;
   }
   
   .settings-button:hover {
-    background-color: #238773;
-    color: white;
+    background-color: #427B5A; 
+    color:white;
   }
 
   #loading-animation {
@@ -61,3 +79,138 @@
     width: 80%;
     height: 80%;
   }
+
+  .language {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Roboto", sans-serif;
+}
+
+.speech {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.language label {
+    font-size: 25px;
+}
+
+.radioButton {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.radioButton:hover input ~ .lang {
+    background-color: #ccc;
+}
+
+.radioButton input:checked ~ .lang {
+    background-color: #427B5A;
+}
+
+.radioMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.radioButton input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.lang { 
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.lang:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+.radioButton input:checked ~ .lang:after {
+    display: block;
+}
+  
+.radioButton .lang:after {
+    top: 10.5px;
+    left: 5.4px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: white;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider.round {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider.round:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider.round {
+    background-color: #427B5A;
+}
+
+input:focus + .slider.round {
+    box-shadow: 0 0 1px #427B5A;
+}
+
+input:checked + .slider.round:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
