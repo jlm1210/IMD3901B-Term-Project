@@ -1,0 +1,63 @@
+.settings-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    z-index: 1;
+    cursor: pointer;
+  }
+  
+  #secondUI {
+  display: none;
+  }
+
+  #firstUI{
+    display: block;
+  }
+
+  #gameUI{
+    position: fixed;
+    display: none;
+    background-color: green;
+    z-index: 1;
+    font-size: 3em;
+  }
+
+  #you {
+    background-color: white;
+  }
+  
+  .center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  
+  .settings-button {
+    width: 100%;
+    background-color: #56e3c7;
+    color: #238773;
+    padding: 30px 20px;
+    margin: 8px 10px 8px 10px;
+    border: 5px solid #ffffff;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .settings-button:hover {
+    background-color: #238773;
+    color: white;
+  }
+
+  #loading-animation {
+    display: none;
+    width: 80%;
+    height: 80%;
+  }
