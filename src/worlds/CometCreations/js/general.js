@@ -112,7 +112,7 @@ if(CIRCLES.isReady()){
   var gCol = 255;
   var bCol = 0;
 
-  window.setInterval(avatarUI ,1000);        
+  window.setInterval(avatarUI, 1000);        
 
   function avatarUI(){
       //get all avatars in the group to show in the UI
@@ -131,7 +131,7 @@ if(CIRCLES.isReady()){
           allAvatars[i].children[2].setAttribute('circles-color', {alpha: 1, color:`rgb(${rCol}, ${gCol}, ${bCol})`});
           allAvatars[i].children[3].setAttribute('circles-color', {alpha: 1, color:`rgb(${rCol}, ${gCol}, ${bCol})`});
 
-          var playerText = document.createElement("h5");
+          var playerText = document.createElement("h2");
           playerText.innerHTML = `Player ${i+1}`;
           playerText.style.backgroundColor = `rgb(${rCol}, ${gCol}, ${bCol})`;
           playerText.setAttribute('id',`player${i}`);
@@ -143,6 +143,15 @@ if(CIRCLES.isReady()){
         var UI = document.querySelector("#team");
         UI.removeChild(UI.lastChild);
         numPlayers = allAvatars.length;
+      }
+
+      
+      console.log(numPlayers);
+      console.log(usersInRoom);
+      if(usersInRoom.length === numPlayers){
+        console.log("close the door");
+        var doorPivot = document.querySelector("#doorParent");
+        doorPivot.setAttribute('rotation', "0 77 0");
       }
     }
 
@@ -159,14 +168,13 @@ if(CIRCLES.isReady()){
       // Check for intersection every 100 milliseconds
       setInterval(function () {
 
-          if(pos.z < boxPos.z){
+          if(pos.z < boxPos.z && !usersInRoom.includes(el)){
             usersInRoom.push(el);
           }
 
       }, 100);
     }
   });
-
 
   setInterval(function () {
     //add knowledge to the UI

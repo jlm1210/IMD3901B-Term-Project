@@ -32,10 +32,17 @@ h1 {
   #gameUI{
     position: fixed;
     display: none;
-    background-color: green;
+    background-color: white;
+    font-family: "Roboto", sans-serif;
+    color: teal;
     z-index: 1;
-    font-size: 3em;
-    width: 15%;
+    width: 20%;
+    height: 100%;
+  }
+
+  #gameUI > h1, #gameUI > h4, #gameUI > h6 {
+    margin: 0;
+    padding: 5px;
   }
 
   #you {

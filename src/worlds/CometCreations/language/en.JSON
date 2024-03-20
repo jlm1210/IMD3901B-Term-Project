@@ -14,6 +14,12 @@
             "Title": "Flask",
             "Desc": "This is a flat bottomed glass flask and it is unknown where it comes from.",
             "Num": "Artifact #1996.0600.001"
+        },
+        "Phone":
+        {
+            "Title": "Phone",
+            "Desc": "This is a phone",
+            "Num": "Artifact #"
         }
     }
 

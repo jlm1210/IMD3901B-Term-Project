@@ -14,6 +14,12 @@
             "Title": "Fiole",
             "Desc": "Une fiole en verre à fond plat et on ne sait pas de où il vient.",
             "Num": "Artefact #1996.0600.001"
+        },
+        "Phone":
+        {
+            "Title": "Telephone",
+            "Desc": "Voici un telephone",
+            "Num": "Artifact #"
         }
     }
 }

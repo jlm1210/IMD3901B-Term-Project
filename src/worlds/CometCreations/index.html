@@ -76,9 +76,9 @@
     <!--game UI-->
     <div id="gameUI">
       <div>
-        <h3 id="info">KNOWLEDGE</h3>
+        <h1 id="info">KNOWLEDGE</h1>
         <div id="team">
-          <h3>PLAYERS</h3>
+          <h1>PLAYERS</h1>
         </div>
       </div>
      </div>
@@ -106,11 +106,14 @@
 
         <!-- add our music and audio here -->
 
-        <!-- add our gltf models here        
-        <a-asset-item id="roomLayout" src="assets/models/Room/BothRoomsWTexture4.gltf" response-type="arraybuffer"/>
-        -->
+        <!-- add our gltf models here           
+        <a-asset-item id="roomLayout" src="assets/models/Room/textures/BothRoomsWTexture4.gltf" response-type="arraybuffer"/>
+ -->    
 
-        <a-asset-item id="flask1Asset" src="assets/textures/flask1.gltf" response-type="arraybuffer"/>
+        <a-asset-item id="flask1Asset" src="assets/models/Room/textures/flask1.gltf" response-type="arraybuffer"/>
+        <a-asset-item id="phoneAsset" src="assets/models/Room/textures/phone.gltf" response-type="arraybuffer"/>
+
+        <a-asset-item id="doorAsset" src="assets/models/Room/textures/medicalDoor.gltf" response-type="arraybuffer"/>
 
         <!-- loading navmesh. Following instructiosn from here: https://github.com/n5ro/aframe-extras/tree/master/src/pathfinding -->
        
@@ -132,25 +135,52 @@
             gltf-model="#roomLayout">
       </a-entity>
 
-
+      
     <a-entity id="Flask1"
-          class="important" 
-          position="5 1.5 5"
-          rotation="0 0 0"
-          scale="10 10 10"
-          gltf-model="#flask1Asset"
-          material="color: rgb(0,0,0)"
-          circles-pickup-networked>
+        class="important" 
+        position="3.714 1.490 -3.817"
+        rotation="0 0 0"
+        scale="10 10 10"
+        gltf-model="#flask1Asset"
+        material="color: rgb(0,0,0)"
+        circles-pickup-networked>
+    </a-entity>
+
+    <a-entity id="doorParent" position="-0.48 0.483 4.599">
+      <a-entity id="medDoor"
+            position="0 0 1.3"
+            rotation="0 193 0"
+            scale="10 14 20"
+            gltf-model="#doorAsset"
+            material="color: rgb(0,0,0)"
+            circles-pickup-networked>
+      </a-entity>
+    </a-entity>
+
+    <a-entity id="Phone"
+        class="important" 
+        position="-1.27 1.074 9.911"
+        rotation="0 -120 0"
+        scale="1 1 1"
+        gltf-model="#phoneAsset"
+        material="color: rgb(0,0,0)"
+        circles-pickup-networked>
     </a-entity>
 
       <!--room trigger box-->
       <a-entity id="labTrigger" position="0.111 1.498 5.411" scale="2 2 1" geometry="primitive:box; width:1; height: 1; depth:1;" material="opacity: 0;"></a-entity>
 
       <!--teleport points-->
-      <a-entity circles-spawnpoint position="-8.79 0.592 9.588"></a-entity>
-      <a-entity class="check" circles-checkpoint position="-0.87 0.592 9.841"></a-entity>
-      <a-entity class="check" circles-checkpoint position="0.728 0.592 1.207"></a-entity>
-      <a-entity class="check" circles-checkpoint position="6.275 0.592 1.108"></a-entity>
+      <a-entity circles-spawnpoint class="check" circles-checkpoint position="-8.79 0.592 9.588"></a-entity>
+      <a-entity class="check" circles-checkpoint position="-4.140 0.592 9.973"></a-entity>
+      <a-entity class="check" circles-checkpoint position="0.369 0.592 8.294"></a-entity>
+      <a-entity class="check" circles-checkpoint position="0.279 0.592 2.372"></a-entity>
+      <a-entity class="check" circles-checkpoint position="3.557 0.592 1.031"></a-entity>
+      <a-entity class="check" circles-checkpoint position="6.546 0.592 2.313"></a-entity>
+      <a-entity class="check" circles-checkpoint position="6.518 0.592 -3.966"></a-entity>
+      <a-entity class="check" circles-checkpoint position="2.161 0.592 -2.242"></a-entity>
+      <a-entity class="check" circles-checkpoint position="2.161 0.592 -6.007"></a-entity>
+      <a-entity class="check" circles-checkpoint position="4.451 0.592 -8.841"></a-entity>
 
       <a-entity id="welcome_description" position="-10.3 2 8.648" rotation="0 0 0"></a-entity>
 
