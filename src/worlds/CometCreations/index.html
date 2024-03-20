@@ -226,9 +226,9 @@
 
         <!-- add our music and audio here -->
 
-        <!-- add our gltf models here
+        <!-- add our gltf models here        -->
         <a-asset-item id="roomLayout" src="assets/models/Room/BothRoomsWTexture4.gltf" response-type="arraybuffer"/>
-        -->
+
 
         <!-- loading navmesh. Following instructiosn from here: https://github.com/n5ro/aframe-extras/tree/master/src/pathfinding -->
        
@@ -242,14 +242,14 @@
       <!-- just creating an entity that connects many elements together -->
       <a-entity id="game_manager" lights-interactive></a-entity>
 
-      <!-- room with some checkpoints 
+      <!-- room with some checkpoints       -->
       <a-entity id="room"
             position="3.5 -0.4 2.485"
             rotation="0 0 0"
             scale="2 2 2"
             gltf-model="#roomLayout">
       </a-entity>
-      -->
+
 
       <!--room trigger box-->
       <a-entity id="labTrigger" position="0.111 1.498 5.411" scale="2 2 1" geometry="primitive:box; width:1; height: 1; depth:1;" material="opacity: 0;"></a-entity>
