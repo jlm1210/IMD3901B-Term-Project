@@ -6,5 +6,14 @@
     "HUBText": 
     {
         "Welcome": "Voici le creation VR de COMET Creations, inspirer du laboratoire médical des années 1950!"
+    },
+    "ArtifactText":
+    {
+        "Flask1":
+        {
+            "Title": "Fiole",
+            "Desc": "Une fiole en verre à fond plat et on ne sait pas de où il vient.",
+            "Num": "Artefact #1996.0600.001"
+        }
     }
 }

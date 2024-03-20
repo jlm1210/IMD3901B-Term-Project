@@ -71,6 +71,11 @@ function startGame(){
           })
           .then((data) => {
             jsonData = data;
+            
+            //send the text to all objects that need it
+            //call setup function from object-generation.js to populate interactable objects
+            setupObjects();
+
           })
           .catch((error) => 
             console.error("Unable to fetch data:", error));
@@ -85,14 +90,12 @@ if(CIRCLES.isReady()){
   var colourOp = document.querySelectorAll(".col");
   for(let i=0; i < colourOp.length; i++){
     if(colourOp[i].checked === true){
-        console.log("yay");
         accessCol = colourOp[i].value;
     }
   }
 
   //colour all checkpoints
   var checkpoints = document.querySelectorAll(".check");
-  console.log(checkpoints);
   for(let i=0; i < checkpoints.length; i++){
     checkpoints[i].setAttribute('material','color', accessCol);
     checkpoints[i].setAttribute('material','emissive', accessCol);
@@ -103,14 +106,6 @@ if(CIRCLES.isReady()){
   document.querySelector('#secondUI').style.display='none';
   document.querySelector('#gameUI').style.display='block';
 
-  //get welcome text
-  //window.setInterval(printy, 1000);
-
-  //function printy(){
-    //setup text
-   // const welcome = document.getElementById('welcome_description');
-    //welcome.setAttribute('circles-description', {title_text_front:'Welcome!', description_text_front:`${jsonData.HUBText.Welcome}`, description_text_back:`${jsonData.HUBText.Welcome}`, lookAtCamera:true});
-  //}
 
   //make a unique colour for each avatar
   var rCol = 0;
@@ -171,20 +166,6 @@ if(CIRCLES.isReady()){
       }, 100);
     }
   });
-
-  //get knowledge of objects when picked up
-  var temp = document.querySelector("#object");
-  temp.addEventListener(CIRCLES.EVENTS.PICKUP_THIS_OBJECT, (e) => {
-    var currentObj = {title: temp.getAttribute('circles-artefact').title, desc: temp.getAttribute('circles-artefact').description}
-
-    //check if we've already pikced up this object
-    const foundObject = objectKnowledge.find(obj => obj.id === currentObj.id && obj.name === currentObj.name);
-
-    if(!foundObject){
-      objectKnowledge.push(currentObj);
-    }
-  });
-
 
 
   setInterval(function () {

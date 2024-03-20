@@ -6,5 +6,15 @@
     "HUBText": 
     {
         "Welcome": "This is COMET Creations' 1950s medical lab inspired escape room VR experience!"
+    },
+    "ArtifactText":
+    {
+        "Flask1":
+        {
+            "Title": "Flask",
+            "Desc": "This is a flat bottomed glass flask and it is unknown where it comes from.",
+            "Num": "Artifact #1996.0600.001"
+        }
     }
+
 }
