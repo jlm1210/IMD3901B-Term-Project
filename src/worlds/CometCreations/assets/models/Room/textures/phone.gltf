@@ -1,0 +1,212 @@
+{
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 18540,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 5360,
+      "max": [
+        6.32769823074341,
+        10.7267217636108,
+        10.0486898422241
+      ],
+      "min": [
+        -9.35088634490967,
+        -4.30068206787109,
+        -10.2393655776978
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 5360,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 5360,
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5126,
+      "count": 5360,
+      "type": "VEC2"
+    }
+  ],
+  "asset": {
+    "generator": "Adobe Substance 3D Painter 9.1.2",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 74160,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 64320,
+      "byteOffset": 74160,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 64320,
+      "byteOffset": 138480,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 85760,
+      "byteOffset": 202800,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 42880,
+      "byteOffset": 288560,
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 331440,
+      "uri": "phone.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "phone_baseColor.png"
+    },
+    {
+      "uri": "phone_occlusionRoughnessMetallic.png"
+    },
+    {
+      "uri": "phone_normal.png"
+    }
+  ],
+  "materials": [
+    {
+      "alphaMode": "OPAQUE",
+      "name": "phone",
+      "normalTexture": {
+        "index": 2
+      },
+      "occlusionTexture": {
+        "index": 1
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicRoughnessTexture": {
+          "index": 1
+        }
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "basePhone1",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 2,
+            "POSITION": 1,
+            "TANGENT": 3,
+            "TEXCOORD_0": 4
+          },
+          "indices": 0,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "name": "RootNode",
+      "scale": [
+        0.00999999977648258,
+        0.00999999977648258,
+        0.00999999977648258
+      ]
+    },
+    {
+      "name": "basePhone"
+    },
+    {
+      "name": "middlePhone"
+    },
+    {
+      "name": "pCube3"
+    },
+    {
+      "name": "pCylinder5"
+    },
+    {
+      "name": "pHelix1"
+    },
+    {
+      "name": "pHelix2"
+    },
+    {
+      "children": [
+        8
+      ],
+      "name": "basePhone1"
+    },
+    {
+      "mesh": 0,
+      "name": "basePhone1"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9985,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    }
+  ]
+}
