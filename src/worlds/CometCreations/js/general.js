@@ -47,7 +47,7 @@ function nextUI(flag){
     //send user to new group
     window.location.href = URL;
 
-    console.log(CIRCLES.getCirclesGroupName());
+    //console.log(CIRCLES.getCirclesGroupName());
   }
 }
 
@@ -86,7 +86,8 @@ function startGame(){
  //wait for circles to load in properly
 if(CIRCLES.isReady()){
 
-      //setup color options
+
+  //setup color options
   var colourOp = document.querySelectorAll(".col");
   for(let i=0; i < colourOp.length; i++){
     if(colourOp[i].checked === true){
@@ -105,6 +106,12 @@ if(CIRCLES.isReady()){
   //switch visible overlays
   document.querySelector('#secondUI').style.display='none';
   document.querySelector('#gameUI').style.display='block';
+
+
+  function gameWin(){
+    var doorPivot = document.querySelector("#doorParent");
+    doorPivot.setAttribute('rotation', "0 0 0");
+  }
 
 
   //make a unique colour for each avatar
@@ -145,14 +152,12 @@ if(CIRCLES.isReady()){
         numPlayers = allAvatars.length;
       }
 
-      
-      console.log(numPlayers);
-      console.log(usersInRoom);
       if(usersInRoom.length === numPlayers){
         console.log("close the door");
         var doorPivot = document.querySelector("#doorParent");
         doorPivot.setAttribute('rotation', "0 77 0");
-      }
+      }  
+
     }
 
     var currAvatar = CIRCLES.getAvatarRigElement();

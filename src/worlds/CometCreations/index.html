@@ -93,6 +93,7 @@
      
     <script src="js/general.js"></script>
     <script src="js/object-generation.js"></script>
+    <script src="js/socket-manager.js"></script>
 
     <!-- this is used to create our enter UI that creates a 2D overlay to capture a user gesture for sound/mic access etc. -->
     <circles-start-ui/>
@@ -125,7 +126,7 @@
       <circles-manager-avatar/>
 
       <!-- just creating an entity that connects many elements together -->
-      <a-entity id="game_manager" lights-interactive></a-entity>
+      <a-entity id="game_manager" lights-interactive socket-manager></a-entity>
 
       <!-- room with some checkpoints       -->
       <a-entity id="room"
