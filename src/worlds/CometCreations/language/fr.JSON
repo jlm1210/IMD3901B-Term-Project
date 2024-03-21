@@ -1,11 +1,12 @@
 {
     "UIText":
     {
-        "player": "Joueur"
+        "Player": "Joueur"
     },
     "HUBText": 
     {
-        "Welcome": "Voici le creation VR de COMET Creations, inspirer du laboratoire médical des années 1950!"
+        "Welcome": "Voici le creation VR de COMET Creations, inspirer du laboratoire medical des annees 1950!",
+        "Win": "Felicitations! Nous esperons que vous avez beaucoup appris sur les laboratoires medicaux dans les annees 1950!"
     },
     "ArtifactText":
     {
@@ -14,6 +15,12 @@
             "Title": "Fiole",
             "Desc": "Une fiole en verre à fond plat et on ne sait pas de où il vient.",
             "Num": "Artefact #1996.0600.001"
+        },
+        "Beaker":
+        {
+            "Title": "Vase a Bec",
+            "Desc": "Un griffon en verre de forme basse avec bécher verseur. Il a ete fabrique par Corning Glass Works aux États-Unis.",
+            "Num": "Artefact #1984.0903.001"
         },
         "Phone":
         {

@@ -9,6 +9,8 @@ var objectKnowledge = [];
 var numPlayers = 0;
 var usersInRoom = [];
 var accessCol = "";
+var currUserInRoom = false;
+var doorOpen = true;
 
 
 window.onload = (event) => {
@@ -86,6 +88,9 @@ function startGame(){
  //wait for circles to load in properly
 if(CIRCLES.isReady()){
 
+    if(userLang.includes("fr")){
+        document.querySelector("#players").innerHTML = "JOUERS";
+    }
 
   //setup color options
   var colourOp = document.querySelectorAll(".col");
@@ -107,10 +112,20 @@ if(CIRCLES.isReady()){
   document.querySelector('#secondUI').style.display='none';
   document.querySelector('#gameUI').style.display='block';
 
+  //////////////////////////TEMPORARY WIN CONDITION////////////////////////////////////
+  var heart = document.querySelector("#heart").addEventListener("click", gameWin);
 
+  //when all puzzles completed, open the door
   function gameWin(){
+    //open door
+    var sound = document.querySelector('#doorOpen');
+    sound.components.sound.playSound();
     var doorPivot = document.querySelector("#doorParent");
     doorPivot.setAttribute('rotation', "0 0 0");
+
+    //change welcome text
+    const welcome = document.getElementById('welcome_description');
+    welcome.setAttribute('circles-description', {title_text_front:'Comet Creations', description_text_front:`${jsonData.HUBText.Win}`, description_text_back:`${jsonData.HUBText.Win}`, lookAtCamera:true});
   }
 
 
@@ -139,7 +154,7 @@ if(CIRCLES.isReady()){
           allAvatars[i].children[3].setAttribute('circles-color', {alpha: 1, color:`rgb(${rCol}, ${gCol}, ${bCol})`});
 
           var playerText = document.createElement("h2");
-          playerText.innerHTML = `Player ${i+1}`;
+          playerText.innerHTML = `${jsonData.UIText.Player} ${i+1}`;
           playerText.style.backgroundColor = `rgb(${rCol}, ${gCol}, ${bCol})`;
           playerText.setAttribute('id',`player${i}`);
           document.querySelector("#team").appendChild(playerText);
@@ -152,10 +167,13 @@ if(CIRCLES.isReady()){
         numPlayers = allAvatars.length;
       }
 
-      if(usersInRoom.length === numPlayers){
+      if(doorOpen === true && usersInRoom.length === numPlayers){
+        var sound = document.querySelector('#doorClose');
+        sound.components.sound.playSound();
         console.log("close the door");
         var doorPivot = document.querySelector("#doorParent");
         doorPivot.setAttribute('rotation', "0 77 0");
+        doorOpen = false;
       }  
 
     }
@@ -170,14 +188,19 @@ if(CIRCLES.isReady()){
       var pos = el.getAttribute('position');
       var boxPos = document.querySelector('#labTrigger').getAttribute('position');
       
-      // Check for intersection every 100 milliseconds
-      setInterval(function () {
+    }, tick: function(){
 
-          if(pos.z < boxPos.z && !usersInRoom.includes(el)){
-            usersInRoom.push(el);
-          }
+        var el = this.el;
+        var pos = el.getAttribute('position');
+        var boxPos = document.querySelector('#labTrigger').getAttribute('position');
 
-      }, 100);
+        if(currUserInRoom === false){
+            if (pos.z < boxPos.z) {
+                usersInRoom.push(el);
+                currUserInRoom = true;
+            }
+        } 
+
     }
   });
 
@@ -198,8 +221,6 @@ if(CIRCLES.isReady()){
 
   }, 100);
 
-} else {
-  document.querySelector('#loading-animation').style.display='block';
 }
 
 }

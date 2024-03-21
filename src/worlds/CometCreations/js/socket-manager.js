@@ -9,26 +9,25 @@ AFRAME.registerComponent('socket-manager', {
         CONTEXT_AF.socket     = null;
         CONTEXT_AF.connected  = false;
         CONTEXT_AF.startGameEventName = "start_event";
+        CONTEXT_AF.shareInfoEvent = "share_event";
 
         CONTEXT_AF.createNetworkingSystem = function () {
             CONTEXT_AF.socket = CIRCLES.getCirclesWebsocket();
             CONTEXT_AF.connected = true;
             console.warn("messaging system connected at socket: " + CONTEXT_AF.socket.id + " in room:" + CIRCLES.getCirclesGroupName() + ' in world:' + CIRCLES.getCirclesWorldName());
 
-          //  console.log(usersInRoom);
-          //  console.log(numPlayers);
-           // if(usersInRoom !== numPlayers){
-              //  setInterval(function () {
-    
-                    //send event to change other client's worlds.
-                    // CONTEXT_AF.socket.emit(CONTEXT_AF.startGameEventName, {usersInRoom:usersInRoom, room:CIRCLES.getCirclesGroupName(), world:CIRCLES.getCirclesWorldName()});
-            
-             //   }, 100);
-          //  }
+            // CONTEXT_AF.campfire.addEventListener('click', function () {
+            //     CONTEXT_AF.socket.emit(CONTEXT_AF.campfireEventName, {campfireOn:CONTEXT_AF.fireOn, room:CIRCLES.getCirclesGroupName(), world:CIRCLES.getCirclesWorldName()});
+            // });
 
-            //listen for when others turn on campfire
+            //listen for when others enter room
             CONTEXT_AF.socket.on(CONTEXT_AF.startGameEventName, function(data) {
-               // console.log(data);
+                console.log(data);
+            });
+
+             //listen for when others pick up an object
+             CONTEXT_AF.socket.on(CONTEXT_AF.shareInfoEvent, function(data) {
+                console.log(data);
             });
 
             // //request other user's state so we can sync up. Asking over a random time to try and minimize users loading and asking at the same time ...
@@ -66,7 +65,13 @@ AFRAME.registerComponent('socket-manager', {
         }
     },tick: function(){
 
-        //CONTEXT_AF.socket.emit(CONTEXT_AF.startGameEventName, {usersInRoom:usersInRoom, room:CIRCLES.getCirclesGroupName(), world:CIRCLES.getCirclesWorldName()});
+        // const CONTEXT_AF = this;
 
+        // if(currUserInRoom){
+
+        //     CONTEXT_AF.data.socket.emit(CONTEXT_AF.data.startGameEventName, {usersInRoom:usersInRoom, room:CIRCLES.getCirclesGroupName(), world:CIRCLES.getCirclesWorldName()});
+        //     currUserInRoom = false;
+        // }
+        
     }
 });

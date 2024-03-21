@@ -54,17 +54,17 @@
             <label class="radioButton">
               <input class="col" type="radio" name="col" value="#d61159" checked/>
               <span class="col"></span>
-              <span for="radio1">pink</span>
+              <span for="radio1"><div id="colPink"></div></span>
             </label>  
               <label class="radioButton">
                <input class="col" type="radio" name="col" value="#12c4db"/>
                <span class="col"></span>
-               <span for="radio2">blue</span>
+               <span for="radio2"><div id="colBlue"></div></span>
               </label>
               <label class="radioButton">
                 <input class="col" type="radio" name="col" value="#34960e"/>
                 <span class="col"></span>
-                <span for="radio2">green</span>
+                <span for="radio2"><div id="colGreen"></div></span>
                </label>
            </div>
         </div>
@@ -76,9 +76,9 @@
     <!--game UI-->
     <div id="gameUI">
       <div>
-        <h1 id="info">KNOWLEDGE</h1>
+        <h1 id="info">INFORMATION</h1>
         <div id="team">
-          <h1>PLAYERS</h1>
+          <h1 id="players">PLAYERS</h1>
         </div>
       </div>
      </div>
@@ -106,6 +106,8 @@
         <img id='skyMap' src='assets/textures/086_hdrmaps_com_free_above_clouds.jpg' crossorigin="anonymous">
 
         <!-- add our music and audio here -->
+        <audio id="door_open" src="assets/models/audio/door-open.mp3" preload="auto" crossorigin="anonymous"></audio>
+        <audio id="door_close" src="assets/models/audio/door_close.mp3" preload="auto" crossorigin="anonymous"></audio>
 
         <!-- add our gltf models here           
         <a-asset-item id="roomLayout" src="assets/models/Room/textures/BothRoomsWTexture4.gltf" response-type="arraybuffer"/>
@@ -113,6 +115,7 @@
 
         <a-asset-item id="flask1Asset" src="assets/models/Room/textures/flask1.gltf" response-type="arraybuffer"/>
         <a-asset-item id="phoneAsset" src="assets/models/Room/textures/phone.gltf" response-type="arraybuffer"/>
+        <a-asset-item id="beakerAsset" src="assets/models/Room/textures/flask2.gltf" response-type="arraybuffer"/>
 
         <a-asset-item id="doorAsset" src="assets/models/Room/textures/medicalDoor.gltf" response-type="arraybuffer"/>
 
@@ -127,6 +130,18 @@
 
       <!-- just creating an entity that connects many elements together -->
       <a-entity id="game_manager" lights-interactive socket-manager></a-entity>
+
+      <!--images-->
+      <a-image class="image" src="assets/models/textures/hand.png" position="0 2 -5" scale="1 1 1"></a-image>
+      <a-image class="image" id="heart" src="assets/models/textures/heart.png" position="1 2 -5" scale="1 1 1"></a-image>
+      <a-image class="image" src="assets/models/textures/legend.png" position="3 2 -5" scale="1 1 1"></a-image>
+      <a-image class="image" src="assets/models/textures/lungs.png" position="4 2 -5" scale="1 1 1"></a-image>
+      <a-image class="image" src="assets/models/textures/calendar.png" position="5 2 -5" scale="1 1 1"></a-image>
+      <a-image class="image" src="assets/models/textures/stomach.png" position="6 2 -5" scale="1 1 1"></a-image>
+
+      <!--sounds-->
+      <a-entity id="doorOpen" sound="src: #door_open;"></a-entity>
+      <a-entity id="doorClose" sound="src: #door_close;"></a-entity>
 
       <!-- room with some checkpoints       -->
       <a-entity id="room"
@@ -146,6 +161,16 @@
         material="color: rgb(0,0,0)"
         circles-pickup-networked>
     </a-entity>
+
+    <a-entity id="Beaker"
+      class="important" 
+      position="2.714 1.490 -2.817"
+      rotation="0 0 0"
+      scale="10 10 10"
+      gltf-model="#beakerAsset"
+      material="color: rgb(0,0,0)"
+      circles-pickup-networked>
+  </a-entity>
 
     <a-entity id="doorParent" position="-0.48 0.483 4.599">
       <a-entity id="medDoor"
