@@ -43,6 +43,25 @@ function setupObjects(){
                 }
             }
 
+            //check if theres a code on it to hide
+            if(currentObj.title === "Phone"){
+                var childCodes = allObjs[i].querySelectorAll(".code");
+                for(let x = 0; x < childCodes.length; x++){
+                    childCodes[x].setAttribute('visible', false);
+                }
+            }
+
+        });
+
+        allObjs[i].addEventListener(CIRCLES.EVENTS.RELEASE_THIS_OBJECT, (e) => {
+            var currentObj = {title: allObjs[i].getAttribute('circles-artefact').title, desc: allObjs[i].getAttribute('circles-artefact').description};
+             //check if theres a code on it to hide
+             if(currentObj.title === "Phone"){
+                var childCodes = allObjs[i].querySelectorAll(".code");
+                for(let x = 0; x < childCodes.length; x++){
+                    childCodes[x].setAttribute('visible', true);
+                }
+            }
         });
     }
 }
