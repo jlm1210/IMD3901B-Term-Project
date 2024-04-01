@@ -11,6 +11,8 @@ var usersInRoom = [];
 var accessCol = "";
 var currUserInRoom = false;
 var doorOpen = true;
+const phoneCode = "0873";
+var phoneGuess = "";
 
 
 window.onload = (event) => {
@@ -87,6 +89,13 @@ function startGame(){
  //------------MAIN GAME LOOP----------------
  //wait for circles to load in properly
 if(CIRCLES.isReady()){
+
+  var cam = CIRCLES.getMainCameraElement();
+  var inter = document.createElement('a-entity');
+  inter.setAttribute('id', 'mouse');
+  inter.setAttribute('cursor', {rayOrigin: 'mouse'});  
+  inter.setAttribute('raycaster', {far: '5'}, {interval: '200'}, {objects: '.inter'});  
+  cam.appendChild(inter); //append it to the cursor
 
     if(userLang.includes("fr")){
         document.querySelector("#players").innerHTML = "JOUERS";

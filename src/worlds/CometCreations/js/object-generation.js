@@ -1,9 +1,12 @@
 //function to populate interactable objects
 function setupObjects(){
 
+    codeManager();
+
     const welcome = document.getElementById('welcome_description');
     welcome.setAttribute('circles-description', {title_text_front:'Comet Creations', description_text_front:`${jsonData.HUBText.Welcome}`, description_text_back:`${jsonData.HUBText.Welcome}`, lookAtCamera:true});
 
+    //posters
     var allImages = document.querySelectorAll(".image");
     for(let i = 0; i < allImages.length; i++){
         allImages[i].setAttribute('circles-interactive-object', {type: "highlight", highlight_color: accessCol});
@@ -64,4 +67,79 @@ function setupObjects(){
             }
         });
     }
+}
+
+function codeManager(){
+
+    //add the floating code UI on the phone and the cabinet
+    var phone = document.querySelector("#Phone");
+    var posZ = 0.2;
+    var posY = 0.4;
+
+    for(let x = 0; x < 10; x++){
+
+        //at 5, move the boxes down
+        if(x%5 === 0 && x != 0){
+            posY = 0.27;
+            posZ = 0.2;
+        }
+
+        var box = document.createElement('a-entity');
+        box.setAttribute('class', 'code inter');
+        //box.setAttribute('circles-interactive-object', {type: "highlight", highlight_color: accessCol});
+        box.setAttribute('id', x);
+        box.setAttribute('geometry', {primitive: 'plane'},{width:'0.5'},{height:'0.5'});
+        box.setAttribute('material', {color: 'rgb(0,0,0)'}, {side: 'double'});
+        box.setAttribute('position', `-0.2 ${posY} ${posZ}`);
+        box.setAttribute('scale', '0.1 0.1 0.1'); 
+        box.setAttribute('rotation', '0 90 0');  
+        phone.appendChild(box); //append it to the phone
+
+        var num = document.createElement('a-entity');
+        num.setAttribute('position', `-0.3 0.17 0.01`);
+        num.setAttribute('scale', '3 3 3'); 
+        num.setAttribute('text', {
+            value: x,
+            color: accessCol,
+            font: 'roboto',
+            width: '1.5',
+            anchor: 'left',
+            baseline: 'top',
+            wrapCount: '12'
+        });
+        box.appendChild(num); //append it to the box
+
+        posZ = posZ-0.1;
+    }
+
+    var boxes = document.querySelectorAll('.code');
+    for(let x = 0; x < 10; x++){
+        // boxes[x].addEventListener("mouseenter", (e) => {
+        //     boxes[x].setAttribute('material', {color: 'rgb(0, 0, 255)'}, {side: 'double'});
+        // });
+        boxes[x].addEventListener("click", (e) => {
+            boxes[x].setAttribute('material', {color: 'rgb(229, 235, 52)'}, {side: 'double'});
+            phoneGuess = phoneGuess.concat(boxes[x].id);
+            codeCheck();
+        });
+    }
+
+}
+
+function codeCheck(){
+
+    if(phoneGuess.length === 4){
+        if(phoneGuess === phoneCode){
+            for(let i = 0; i < phoneCode.length; i++){
+                document.querySelectorAll('.code')[phoneCode[i]].setAttribute('material', {color: 'rgb(0, 255, 0)'}, {side: 'double'});
+            }
+            
+        } else {
+            phoneGuess = "";
+            for(let i = 0; i < 10; i++){
+                document.querySelectorAll('.code')[i].setAttribute('material', {color: 'rgb(0, 0, 0)'}, {side: 'double'});
+            }
+        }
+    }
+
 }
