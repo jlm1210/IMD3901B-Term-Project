@@ -117,7 +117,8 @@
         <a-asset-item id="beakerAsset" src="assets/models/Room/textures/flask2.gltf" response-type="arraybuffer"/>
         <a-asset-item id="doorAsset" src="assets/models/Room/textures/medicalDoor.gltf" response-type="arraybuffer"/>
   -->
-  <a-asset-item id="phoneAsset" src="assets/models/Room/textures/phone.gltf" response-type="arraybuffer"/>
+        <a-asset-item id="phoneAsset" src="assets/models/Room/textures/phone.gltf" response-type="arraybuffer"/>
+        <a-asset-item id="cabinetAsset" src="assets/models/clock_gltf_export.glb" response-type="arraybuffer"/>
         <!-- loading navmesh. Following instructiosn from here: https://github.com/n5ro/aframe-extras/tree/master/src/pathfinding -->
        
         <!-- Circles' built-in assets [REQUIRED] -->
@@ -190,7 +191,15 @@
         gltf-model="#phoneAsset"
         material="color: rgb(0,0,0)"
         circles-pickup-networked>   
-      </a-entity>
+    </a-entity>
+
+    <a-entity id="Cabinet"
+        position="1 1 10"
+        rotation="0 -120 0"
+        scale="0.03 0.03 0.03"
+        gltf-model="#cabinetAsset"
+        material="color: rgb(0,0,0)"
+        circles-pickup-networked>   
     </a-entity>
 
       <!--room trigger box-->

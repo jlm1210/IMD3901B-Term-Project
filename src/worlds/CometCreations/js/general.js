@@ -12,7 +12,9 @@ var accessCol = "";
 var currUserInRoom = false;
 var doorOpen = true;
 const phoneCode = "0873";
+const cabinetCode = "2134";
 var phoneGuess = "";
+var cabinetGuess = "";
 
 
 window.onload = (event) => {
