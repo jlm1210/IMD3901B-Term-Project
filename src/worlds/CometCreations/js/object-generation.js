@@ -47,12 +47,10 @@ function setupObjects(){
         allObjs[i].addEventListener(CIRCLES.EVENTS.PICKUP_THIS_OBJECT, (e) => {
             var currentObj = {title: allObjs[i].getAttribute('circles-artefact').title, desc: allObjs[i].getAttribute('circles-artefact').description};
             var alreadyPicked = false;
-
             //var socketContext = document.querySelector("#game-manager").getAttribute('socket-manager');
-
             //check if we've already picked up this object
             if(objectKnowledge.length == 0){
-                objectKnowledge.push(currentObj);
+                objectKnowledge.push(currentObj); //add the first object regardless
                 //socketContext.socket.emit(socketContext.shareInfoEvent, {info:currentObj, room:CIRCLES.getCirclesGroupName(), world:CIRCLES.getCirclesWorldName()});
             } else {
                 for(let x = 0; x < objectKnowledge.length; x++){
@@ -65,6 +63,31 @@ function setupObjects(){
                 }
             }
 
+            if(!alreadyPicked){
+                //put the info into the UI
+                //title
+                var newEl = document.createElement("h4");
+                newEl.innerHTML = currentObj.title;
+             
+                //description
+                var innerEl = document.createElement("h6");
+                innerEl.setAttribute('id', currentObj.title + "id");
+                innerEl.innerHTML = currentObj.desc;
+                innerEl.setAttribute('style', 'display: none;');
+                newEl.appendChild(innerEl);
+                document.querySelector("#info").appendChild(newEl);
+
+                //button
+                var newButton = document.createElement("button"); 
+                newButton.innerHTML = "INFO";
+                newButton.setAttribute('class', "descButton");
+                newButton.addEventListener("click", function() {
+                    showDesc(currentObj.title);
+                });
+                document.querySelector("#info").appendChild(newButton);
+
+            }
+
             //check if theres a code on it to hide
             if(currentObj.title === "Phone"){
                 var childCodes = allObjs[i].querySelectorAll(".code");
@@ -72,7 +95,6 @@ function setupObjects(){
                     childCodes[x].setAttribute('visible', false);
                 }
             }
-
         });
 
         allObjs[i].addEventListener(CIRCLES.EVENTS.RELEASE_THIS_OBJECT, (e) => {

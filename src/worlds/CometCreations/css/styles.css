@@ -238,3 +238,25 @@ input:checked + .slider.round:before {
 .slider.round:before {
     border-radius: 50%;
 }
+
+h3 {
+  text-align: left;
+  font-family: "Roboto", sans-serif;
+  color: teal;
+  margin: 0; 
+}
+
+.panel {
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
+  padding: 20px;
+  border: 10px solid darkslategray;
+  border-radius: 20px;
+  width: 200px;
+  height: calc(100vh - 80px);
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  background-color:white;
+}
