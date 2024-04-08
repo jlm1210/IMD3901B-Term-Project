@@ -109,16 +109,16 @@
         <audio id="door_open" src="assets/models/audio/door-open.mp3" preload="auto" crossorigin="anonymous"></audio>
         <audio id="door_close" src="assets/models/audio/door_close.mp3" preload="auto" crossorigin="anonymous"></audio>
 
-        <!-- add our gltf models here     -->         
+        <!-- add our gltf models here             
         <a-asset-item id="roomLayout" src="assets/models/Room/textures/BothRoomsWTexture21.gltf" response-type="arraybuffer"/>
-  
-
+  --> 
+       <!-- objects
         <a-asset-item id="flask1Asset" src="assets/models/Room/textures/flask1.gltf" response-type="arraybuffer"/>
-        <a-asset-item id="phoneAsset" src="assets/models/Room/textures/phone.gltf" response-type="arraybuffer"/>
         <a-asset-item id="beakerAsset" src="assets/models/Room/textures/flask2.gltf" response-type="arraybuffer"/>
-
         <a-asset-item id="doorAsset" src="assets/models/Room/textures/medicalDoor.gltf" response-type="arraybuffer"/>
-
+  -->
+        <a-asset-item id="phoneAsset" src="assets/models/Room/textures/phone.gltf" response-type="arraybuffer"/>
+        <a-asset-item id="cabinetAsset" src="assets/models/clock_gltf_export.glb" response-type="arraybuffer"/>
         <!-- loading navmesh. Following instructiosn from here: https://github.com/n5ro/aframe-extras/tree/master/src/pathfinding -->
        
         <!-- Circles' built-in assets [REQUIRED] -->
@@ -131,14 +131,14 @@
       <!-- just creating an entity that connects many elements together -->
       <a-entity id="game_manager" lights-interactive socket-manager></a-entity>
 
-      <!--images-->
+      <!--images
       <a-image class="image" src="assets/models/textures/hand.png" position="0 2 -10.07" scale="1 1 1"></a-image>
       <a-image class="image" id="heart" src="assets/models/textures/heart.png" position="7.610 2 -5" scale="1 1 1" rotation="0 270 0"></a-image>
       <a-image class="image" src="assets/models/textures/legend.png" position="3 2 -10.07" scale="1 1 1" rotation="0 0 0"></a-image>
       <a-image class="image" src="assets/models/textures/lungs.png" position="7.5 2 -8" scale="1 1 1" rotation="0 270 0"></a-image>
       <a-image class="image" src="assets/models/textures/calendar.png" position="0.647 2.610 -0.858" scale="1 1 1" rotation="0 180 0"></a-image>
       <a-image class="image" src="assets/models/textures/stomach.png" position="6 2 -10.07" scale="1 1 1"></a-image>
-
+-->
       <!--sounds-->
       <a-entity id="doorOpen" sound="src: #door_open;"></a-entity>
       <a-entity id="doorClose" sound="src: #door_close;"></a-entity>
@@ -190,7 +190,16 @@
         scale="1 1 1"
         gltf-model="#phoneAsset"
         material="color: rgb(0,0,0)"
-        circles-pickup-networked>
+        circles-pickup-networked>   
+    </a-entity>
+
+    <a-entity id="Cabinet"
+        position="1 1 10"
+        rotation="0 -120 0"
+        scale="0.03 0.03 0.03"
+        gltf-model="#cabinetAsset"
+        material="color: rgb(0,0,0)"
+        circles-pickup-networked>   
     </a-entity>
 
       <!--room trigger box-->
