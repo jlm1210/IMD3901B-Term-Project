@@ -122,6 +122,7 @@ function startGame(){
     document.querySelector('#secondUI').style.display='none';
     document.querySelector('#gameUI').style.display='block';
 
+
     //////////////////////////TEMPORARY WIN CONDITION////////////////////////////////////
     //var heart = document.querySelector("#heart").addEventListener("click", gameWin);
 
@@ -205,6 +206,7 @@ function startGame(){
 
 
 //miscellaneous functions
+//toggle to show object description in UI
 function showDesc(object){
   var currObj = document.querySelector(`#${object}id`);
   (currObj.style.display === "none") ? currObj.setAttribute('style', 'display: block;') : currObj.setAttribute('style', 'display: none;');
