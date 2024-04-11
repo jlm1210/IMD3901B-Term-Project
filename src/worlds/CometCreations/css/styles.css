@@ -40,15 +40,21 @@ h1 {
     height: 100%;
   }
 
-  #gameUI > h1, #gameUI > h4, #gameUI > h6 {
+  h4, h6, h2 {
+    text-align: left;
+    font-family: "Roboto", sans-serif;
+    color: black;
     margin: 0;
-    padding: 5px;
   }
 
-  .objectText {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  h6 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .objectText{
+    padding-top: 15px;
+    display:flex;
   }
 
   #colPink{
@@ -100,15 +106,19 @@ h1 {
   }
 
   .descButton {
-    cursor: pointer;
+    margin-left: 10px;
     border-radius: 12px;
-    padding: 12px 12px;
     background-color: #e7e7e7; color: black;
     transition-duration: 0.4s;
     font-family: "Roboto", sans-serif;
   }
+
+.descButton:hover {
+    background-color: #427B5A; 
+    color:white;
+  }
   
-  .settings-button:hover, .descButton:hover {
+  .settings-button:hover{
     background-color: #427B5A; 
     color:white;
   }
@@ -259,6 +269,7 @@ h3 {
   font-family: "Roboto", sans-serif;
   color: teal;
   margin: 0; 
+  margin-bottom: 10px;
 }
 
 .panel {

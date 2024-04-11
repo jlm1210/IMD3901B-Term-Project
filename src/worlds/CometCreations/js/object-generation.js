@@ -95,19 +95,24 @@ function setupObjects(){
             if(!alreadyPicked){
                 //put the info into the UI
                 var container = document.createElement("div");
-                container.setAttribute('class', "objectText");
+
+                //second container to align title and button
+                var container2 = document.createElement("div");
+                container2.setAttribute('class', "objectText");
+                container.appendChild(container2);
+                //container2.setAttribute('class', "objectText");
 
                 //title
                 var newEl = document.createElement("h4");
                 newEl.innerHTML = currentObj.title;
-                container.appendChild(newEl);
+                container2.appendChild(newEl);
              
                 //description
                 var innerEl = document.createElement("h6");
                 innerEl.setAttribute('id', currentObj.title + "id");
                 innerEl.innerHTML = currentObj.desc;
                 innerEl.setAttribute('style', 'display: none;');
-                newEl.appendChild(innerEl);
+                container.appendChild(innerEl);
                 document.querySelector("#info").appendChild(container);
 
                 //button
@@ -117,7 +122,7 @@ function setupObjects(){
                 newButton.addEventListener("click", function() {
                     showDesc(currentObj.title);
                 });
-                container.appendChild(newButton);
+                container2.appendChild(newButton);
 
             }
 
