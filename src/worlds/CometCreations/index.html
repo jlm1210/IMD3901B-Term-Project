@@ -112,11 +112,12 @@
         <!-- add our gltf models here             
         <a-asset-item id="roomLayout" src="assets/models/Room/textures/BothRoomsWTexture21.gltf" response-type="arraybuffer"/>
   --> 
-       <!-- objects
+       <!-- objects-->
 
         <a-asset-item id="flask1Asset" src="assets/models/Room/textures/flask1.gltf" response-type="arraybuffer"/>
+
         <a-asset-item id="beakerAsset" src="assets/models/Room/textures/flask2.gltf" response-type="arraybuffer"/>
-          -->
+
         <a-asset-item id="keyAsset" src="assets/models/key_glb_export.glb" response-type="arraybuffer"/>
 
         <a-asset-item id="phoneAsset" src="assets/models/Room/textures/phone.gltf" response-type="arraybuffer"/>
@@ -135,19 +136,19 @@
       <!-- just creating an entity that connects many elements together -->
       <a-entity id="game_manager" lights-interactive socket-manager></a-entity>
 
-      <!--images
+      <!--images-->
       <a-image class="image" src="assets/models/textures/hand.png" position="0 2 -10.07" scale="1 1 1"></a-image>
       <a-image class="image" id="heart" src="assets/models/textures/heart.png" position="7.610 2 -5" scale="1 1 1" rotation="0 270 0"></a-image>
       <a-image class="image" src="assets/models/textures/legend.png" position="3 2 -10.07" scale="1 1 1" rotation="0 0 0"></a-image>
       <a-image class="image" src="assets/models/textures/lungs.png" position="7.5 2 -8" scale="1 1 1" rotation="0 270 0"></a-image>
       <a-image class="image" src="assets/models/textures/calendar.png" position="0.647 2.610 -0.858" scale="1 1 1" rotation="0 180 0"></a-image>
       <a-image class="image" src="assets/models/textures/stomach.png" position="6 2 -10.07" scale="1 1 1"></a-image>
--->
+
       <!--sounds-->
       <a-entity id="doorOpen" sound="src: #door_open;"></a-entity>
       <a-entity id="doorClose" sound="src: #door_close;"></a-entity>
 
-      <!-- room with some checkpoints       -->
+      <!-- room with some checkpoints-->
       <a-entity id="room"
             position="3.5 -0.4 2.485"
             rotation="0 0 0"
@@ -155,7 +156,71 @@
             gltf-model="#roomLayout">
       </a-entity>
 
-      
+    <!---medicines for puzzle-->  
+    <a-entity id="medicine1"
+        position="1 1.490 0"
+        rotation="0 0 0"
+        scale="10 10 10"
+        gltf-model="#flask1Asset"
+        material="color: rgb(0,0,0)"
+        visible="true"
+        circles-pickup-networked>
+    </a-entity>
+    <a-entity id="medicine2" 
+          position="2 1.490 0"
+          rotation="0 0 0"
+          scale="10 10 10"
+          gltf-model="#flask1Asset"
+          material="color: rgb(0,0,0)"
+          visible="true"
+          circles-pickup-networked>
+      </a-entity>
+      <a-entity id="medicine3"
+          position="3 1.490 0"
+          rotation="0 0 0"
+          scale="10 10 10"
+          gltf-model="#flask1Asset"
+          material="color: rgb(0,0,0)"
+          visible="true"
+          circles-pickup-networked>
+      </a-entity>
+      <a-entity id="medicine4"
+          position="4 1.490 0"
+          rotation="0 0 0"
+          scale="10 10 10"
+          gltf-model="#flask1Asset"
+          material="color: rgb(0,0,0)"
+          visible="true"
+          circles-pickup-networked>
+      </a-entity>
+
+      <!---plates for puzzle--> 
+      <a-entity id="plate1"
+          position="1 1 0"
+          scale="0.2 0.2 0.2"
+          geometry="primitive: cylinder; height: 0.1; radius: 1"
+          material="color: rgb(0,0,0)">
+      </a-entity>
+      <a-entity id="plate2"
+          position="2 1 0"
+          scale="0.2 0.2 0.2"
+          geometry="primitive: cylinder; height: 0.1; radius: 1"
+          material="color: rgb(0,0,0)">
+      </a-entity>
+      <a-entity id="plate3"
+          position="3 1 0"
+          scale="0.2 0.2 0.2"
+          geometry="primitive: cylinder; height: 0.1; radius: 1"
+          material="color: rgb(0,0,0)">
+      </a-entity>
+      <a-entity id="plate4"
+          position="4 1 0"
+          scale="0.2 0.2 0.2"
+          geometry="primitive: cylinder; height: 0.1; radius: 1"
+          material="color: rgb(0,0,0)">
+      </a-entity>
+
+    <!---other items--> 
     <a-entity id="Flask1"
         class="important" 
         position="3.714 1.490 -3.817"
