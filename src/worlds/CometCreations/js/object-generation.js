@@ -1,5 +1,6 @@
 //function to populate interactable objects
 function setupObjects(){
+    console.log("setting up objects");
 
     //setup the phone and its code input UI
     var phone = document.querySelector("#Phone");
@@ -22,6 +23,7 @@ function setupObjects(){
     codeManager(cabinet, posX, posY, posZ, scale, rot);
     codeEvents();
 
+
     //setup the interactable medicines
     for(let i = 0; i < 4; i++){
         let med = document.querySelector(`#medicine${i+1}`);
@@ -30,34 +32,30 @@ function setupObjects(){
 
         //add a click function to pickup
         med.addEventListener('click', function() {
-            med.setAttribute('visible', false);
-            med.removeEventListener('click', arguments.callee);
-            med.flushToDOM();
-            var copy = med.cloneNode();
             var player = CIRCLES.getMainCameraElement();
-            player.appendChild(copy);
-            copy.setAttribute('visible', true);     
-            copy.setAttribute('position', "0.5 -0.5 -1");
+
+            //if not already holding a medicine, then you can pick it up
+            if(!player.querySelector('[id*="medicine"]')){
+                med.setAttribute('visible', false);
+                //med.removeEventListener('click', arguments.callee);
+                med.flushToDOM();
+                var copy = med.cloneNode();
+
+                player.appendChild(copy);
+                copy.setAttribute('visible', true);     
+                copy.setAttribute('position', "0.5 -0.5 -1");
+                med.parentNode.removeChild(med); //delete the original item
+            }
         });
     }
 
     //setup the interactable plates
     for(let i = 0; i < 4; i++){
-        let plate = document.querySelector(`#plate${i+1}`);
+        let plate = document.querySelector(`#plateM${i+1}`);
         plate.setAttribute('class', 'inter');
         plate.setAttribute('circles-interactive-object', {type: "highlight", highlight_color: accessCol});
 
-        //add a click function to pickup
-        plate.addEventListener('click', function() {
-
-            var player = CIRCLES.getMainCameraElement();
-            var allChildren = player.children;
-            for (var i = 0; i < allChildren.length; i++) {
-                if(allChildren[i].id.includes("medicine")){
-                    console.log("put down");
-                }
-            }
-        });
+        plate.addEventListener('click', plateHandler);
     }
 
 

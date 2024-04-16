@@ -39,30 +39,21 @@
               </label>
            </div>
         </div>
-        <div class="speech">
-          <h1><br>TEXT TO SPEECH</h1>
-          <div class="switchMenu">
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-          </div>
-        </div>
         <div class="colour">
           <h1><br>COLOR OPTIONS</h1>
           <div class="radioMenu">
             <label class="radioButton">
-              <input class="col" type="radio" name="col" value="#d61159" checked/>
+              <input class="col" type="radio" name="col" value="#601E9E" checked/>
               <span class="col"></span>
               <span for="radio1"><div id="colPink"></div></span>
             </label>  
               <label class="radioButton">
-               <input class="col" type="radio" name="col" value="#12c4db"/>
+               <input class="col" type="radio" name="col" value="#EE8920"/>
                <span class="col"></span>
                <span for="radio2"><div id="colBlue"></div></span>
               </label>
               <label class="radioButton">
-                <input class="col" type="radio" name="col" value="#34960e"/>
+                <input class="col" type="radio" name="col" value="#274E13"/>
                 <span class="col"></span>
                 <span for="radio2"><div id="colGreen"></div></span>
                </label>
@@ -144,6 +135,8 @@
       <a-image class="image" src="assets/models/textures/calendar.png" position="0.647 2.610 -0.858" scale="1 1 1" rotation="0 180 0"></a-image>
       <a-image class="image" src="assets/models/textures/stomach.png" position="6 2 -10.07" scale="1 1 1"></a-image>
 
+      <a-image class="image" id="medLabel" src="assets/models/textures/medPlaque.png" position="2 2 2" scale="1 1 1" crossorigin="anonymous"/></a-image>
+
       <!--sounds-->
       <a-entity id="doorOpen" sound="src: #door_open;"></a-entity>
       <a-entity id="doorClose" sound="src: #door_close;"></a-entity>
@@ -195,29 +188,35 @@
       </a-entity>
 
       <!---plates for puzzle--> 
-      <a-entity id="plate1"
+      <a-entity id="plateM1"
           position="1 1 0"
           scale="0.2 0.2 0.2"
           geometry="primitive: cylinder; height: 0.1; radius: 1"
           material="color: rgb(0,0,0)">
       </a-entity>
-      <a-entity id="plate2"
+      <a-entity id="plateM2"
           position="2 1 0"
           scale="0.2 0.2 0.2"
           geometry="primitive: cylinder; height: 0.1; radius: 1"
           material="color: rgb(0,0,0)">
       </a-entity>
-      <a-entity id="plate3"
+      <a-entity id="plateM3"
           position="3 1 0"
           scale="0.2 0.2 0.2"
           geometry="primitive: cylinder; height: 0.1; radius: 1"
           material="color: rgb(0,0,0)">
       </a-entity>
-      <a-entity id="plate4"
+      <a-entity id="plateM4"
           position="4 1 0"
           scale="0.2 0.2 0.2"
           geometry="primitive: cylinder; height: 0.1; radius: 1"
           material="color: rgb(0,0,0)">
+      </a-entity>
+      <a-entity id="resetButton"
+          position="5 1 0"
+          scale="0.1 0.1 0.1"
+          geometry="primitive: cylinder; height: 0.1; radius: 1"
+          material="color: rgb(255,0,0)">
       </a-entity>
 
     <!---other items--> 

@@ -123,8 +123,49 @@ function startGame(){
     document.querySelector('#gameUI').style.display='block';
 
 
-    //////////////////////////TEMPORARY WIN CONDITION////////////////////////////////////
-    //var heart = document.querySelector("#heart").addEventListener("click", gameWin);
+    //reset button for medicine puzzle
+    let button = document.querySelector('#resetButton');
+    button.setAttribute('class', 'inter');
+    button.setAttribute('circles-interactive-object', {type: "highlight", highlight_color: accessCol});
+
+    button.addEventListener('click', function() {
+        console.log("reset");
+
+        for(let i = 0; i < 4; i++){
+            let med = document.querySelector(`#medicine${i+1}`);
+            med.flushToDOM();
+            let copy = med.cloneNode();
+            med.parentNode.removeChild(med);
+            document.querySelector('a-scene').appendChild(copy);
+            copy.setAttribute('position', `${i+1} 1.490 0`);
+            copy.setAttribute('scale', '10 10 10');
+
+
+            //add a click function to pickup
+            copy.addEventListener('click', function() {
+              var player = CIRCLES.getMainCameraElement();
+
+              //if not already holding a medicine, then you can pick it up
+              if(!player.querySelector('[id*="medicine"]')){
+                copy.setAttribute('visible', false);
+                  //med.removeEventListener('click', arguments.callee);
+                  copy.flushToDOM();
+                  var copy2 = copy.cloneNode();
+
+                  player.appendChild(copy2);
+                  copy2.setAttribute('visible', true);     
+                  copy2.setAttribute('position', "0.5 -0.5 -1");
+                  copy.parentNode.removeChild(copy); //delete the original item
+              }
+          });
+
+          let plate = document.querySelector(`#plateM${i+1}`);
+
+          plate.addEventListener('click', plateHandler);
+        }
+
+    });
+
 
 
     //make a unique colour for each avatar
@@ -220,7 +261,70 @@ function gameWin(){
   var doorPivot = document.querySelector("#doorParent");
   doorPivot.setAttribute('rotation', "0 0 0");
 
+  //toggle interactivity of reset button
+  let button = document.querySelector('#resetButton');
+  button.classList.remove('inter');
+  button.removeAttribute('circles-interactive-object');
+
+  //colour plates green
+  for(let i = 0; i < 4; i++){
+    let plate = document.querySelector(`#plateM${i+1}`);
+    plate.setAttribute('material', {color: 'rgb(0, 255, 0)'});
+
+  }
+
+
   //change welcome text
   const welcome = document.getElementById('welcome_description');
   welcome.setAttribute('circles-description', {title_text_front:'Comet Creations', description_text_front:`${jsonData.HUBText.Win}`, description_text_back:`${jsonData.HUBText.Win}`, lookAtCamera:true});
+}
+
+//run everytime a medicine is put on a plate to check if the win condition can be triggered
+function checkMeds(){
+
+  var correctCount = 0;
+  var plates = document.querySelectorAll('[id*="plateM"]');
+
+  for(let i = 0; i < plates.length; i++){
+    if(plates[i].querySelector(`#medicine${i+1}`)){
+      correctCount++;
+    }
+  }
+
+  if(correctCount === 4){
+    console.log("game win");
+    gameWin();
+  }
+
+}
+
+function plateHandler(event) {
+  var player = CIRCLES.getMainCameraElement();
+  console.log("clicked");
+  var plate = event.target;
+
+  let playerHoldingMedicine = player.querySelector('[id*="medicine"]') !== null;
+
+  // Check if the plate is holding a medicine
+  let plateHoldingMedicine = plate.querySelector('[id*="medicine"]') !== null;
+
+  // Handle putting down or picking up medicine based on conditions
+  if (playerHoldingMedicine && !plateHoldingMedicine) {
+      console.log("put down from player to plate");
+      let med = player.querySelector('[id*="medicine"]'); // Get the medicine we are holding
+      med.setAttribute('visible', false);
+      plate.removeEventListener('click', plateHandler);
+      med.flushToDOM();
+      var copy = med.cloneNode();
+      plate.appendChild(copy);
+      copy.setAttribute('visible', true);     
+      copy.setAttribute('position', "0 0.036 0");
+      copy.setAttribute('scale', "50 50 50");
+      player.removeChild(med); // Delete the original item
+
+      //check to see if the win condition is met
+      checkMeds();
+
+   } 
+
 }
