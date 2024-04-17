@@ -26,8 +26,14 @@
         "Phone":
         {
             "Title": "Phone",
-            "Desc": "This is a phone",
-            "Num": "Artifact #"
+            "Desc": "This phone is from 1957 and was manufactured by Northern Electric Co. Ltd. Canada from Montreal, Quebec.",
+            "Num": "Artifact #1978.0133.001"
+        },
+        "Clock":
+        {
+            "Title": "Clock",
+            "Desc": "This shelf clock (Eclipse model) was manufactured by Pequegnat, Arthur Clock Co. in Kitchener, Ontario. It is dated between 1904 and 1943.",
+            "Num": "Artifact #1975.0295.001"
         }
     }
 

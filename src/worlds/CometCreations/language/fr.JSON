@@ -14,20 +14,26 @@
         "Flask1":
         {
             "Title": "Fiole",
-            "Desc": "Une fiole en verre à fond plat et on ne sait pas de où il vient.",
+            "Desc": "Une fiole en verre a fond plat et on ne sait pas de où il vient.",
             "Num": "Artefact #1996.0600.001"
         },
         "Beaker":
         {
             "Title": "Vase a Bec",
-            "Desc": "Un griffon en verre de forme basse avec bécher verseur. Il a ete fabrique par Corning Glass Works aux États-Unis.",
+            "Desc": "Un griffon en verre de forme basse avec bécher verseur. Il a ete fabrique par Corning Glass Works aux Etats-Unis.",
             "Num": "Artefact #1984.0903.001"
         },
         "Phone":
         {
             "Title": "Telephone",
-            "Desc": "Voici un telephone",
-            "Num": "Artifact #"
+            "Desc": "Ce telephone date de 1957 et a ete fabrique par Northern Electric Co. Ltd. Canada de Montreal, Quebec.",
+            "Num": "Artefact #1978.0133.001"
+        },
+        "Clock":
+        {
+            "Title": "Horloge",
+            "Desc": "Cette horloge d'etagere (modele Eclipse) a ete fabriquee par Pequegnat, Arthur Clock Co. a Kitchener, Ontario. Elle est datee entre 1904 et 1943.",
+            "Num": "Artefact #1975.0295.001"
         }
     }
 }

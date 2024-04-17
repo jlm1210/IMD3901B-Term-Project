@@ -287,13 +287,16 @@ function codeCheck(id){
                     document.querySelectorAll('.code')[r].setAttribute('material', {color: 'rgb(0, 255, 0)'}, {side: 'double'});
                     var sound = document.querySelector('#cabinetCorrect');
                     sound.components.sound.playSound();
+
+                    document.querySelector('#CabinetClosed').setAttribute('visible', false);
+                    document.querySelector('#Cabinet').setAttribute('visible', true);
                 }
                 
             } else { //if its wrong
                 cabinetGuess = "";
                 for(let i = 10; i < 20; i++){
                     document.querySelectorAll('.code')[i].setAttribute('material', {color: 'rgb(0, 0, 0)'}, {side: 'double'});
-                    var sound = document.querySelector('#cabinetInorrect');
+                    var sound = document.querySelector('#cabinetIncorrect');
                     sound.components.sound.playSound();
                 }
             }
