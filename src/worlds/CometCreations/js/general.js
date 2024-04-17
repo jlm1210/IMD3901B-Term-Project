@@ -12,7 +12,7 @@ var accessCol = "";
 var currUserInRoom = false;
 var doorOpen = true;
 const phoneCode = "0915";
-const cabinetCode = "2134";
+const cabinetCode = "1234";
 var phoneGuess = "";
 var cabinetGuess = "";
 
@@ -154,12 +154,14 @@ function startGame(){
 
         for(let i = 0; i < 4; i++){
             let med = document.querySelector(`#medicine${i+1}`);
+            //let medScale = med.getAttribute('scale');
+           // med.setAttribute('scale', `${medScale.x/5}, ${medScale.y/5}, ${medScale.z/5}`);
             med.flushToDOM();
             let copy = med.cloneNode();
             med.parentNode.removeChild(med);
             document.querySelector('a-scene').appendChild(copy);
-            copy.setAttribute('position', `${i+1} 1.490 0`);
-            copy.setAttribute('scale', '10 10 10');
+            copy.setAttribute('position', `${i-0.6} 1.53 -0.9`);
+            //copy.setAttribute('scale', `${medScale.x / 5}, ${medScale.y / 5}, ${medScale.z / 5}`);
 
 
             //add a click function to pickup
@@ -302,19 +304,29 @@ function gameWin(){
 
 //run everytime a medicine is put on a plate to check if the win condition can be triggered
 function checkMeds(){
-
+  console.log("checking");
   var correctCount = 0;
+  var plateHoldCount = 0;
   var plates = document.querySelectorAll('[id*="plateM"]');
 
   for(let i = 0; i < plates.length; i++){
-    if(plates[i].querySelector(`#medicine${i+1}`)){
+    if(plates[i].querySelector(`#medicine${i+1}`)){ //if its right
       correctCount++;
+    }
+
+    if(plates[i].querySelector('[id*="medicine"]')){ //if its at least holding something
+      plateHoldCount++;
     }
   }
 
-  if(correctCount === 4){
+  if(correctCount === 4){ //if its right
     console.log("game win");
     gameWin();
+  }
+
+  if(plateHoldCount === 4 && correctCount !== 4){ //if its wrong
+    var sound = document.querySelector('#medsIncorrect');
+    sound.components.sound.playSound();
   }
 
 }
@@ -335,12 +347,13 @@ function plateHandler(event) {
       let med = player.querySelector('[id*="medicine"]'); // Get the medicine we are holding
       med.setAttribute('visible', false);
       plate.removeEventListener('click', plateHandler);
+      let medScale = med.getAttribute('scale');
       med.flushToDOM();
       var copy = med.cloneNode();
       plate.appendChild(copy);
       copy.setAttribute('visible', true);     
       copy.setAttribute('position', "0 0.036 0");
-      copy.setAttribute('scale', "50 50 50");
+      copy.setAttribute('scale', `${medScale.x * 5}, ${medScale.y * 5}, ${medScale.z * 5}`);
       player.removeChild(med); // Delete the original item
 
       //check to see if the win condition is met

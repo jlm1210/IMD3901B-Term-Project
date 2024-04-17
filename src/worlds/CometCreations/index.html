@@ -103,9 +103,10 @@
         <audio id="phone_incorrect" src="assets/audio/phone-incorrect.mp3" preload="auto" crossorigin="anonymous"></audio>
         <audio id="cabinet_correct" src="assets/audio/cabinet-open.mp3" preload="auto" crossorigin="anonymous"></audio>
         <audio id="cabinet_incorrect" src="assets/audio/cabinet-lock.mp3" preload="auto" crossorigin="anonymous"></audio>
+        <audio id="meds_incorrect" src="assets/audio/incorrect-buzz.mp3" preload="auto" crossorigin="anonymous"></audio>
 
         <!-- add our gltf models here   -->             
-        <a-asset-item id="roomLayout" src="assets/models/RoomTemp/BothRoomsWTexture32.gltf" response-type="arraybuffer"/>
+        <a-asset-item id="roomLayout" src="assets/models/Room3/BothRoomsWTexture34.gltf" response-type="arraybuffer"/>
 
        <!-- objects-->
 
@@ -124,7 +125,7 @@
 
         <a-asset-item id="phoneAsset" src="assets/models/CodeObjects/phone.gltf" response-type="arraybuffer"/>
         <a-asset-item id="cabinetAsset" src="assets/models/CabinetOpen/cab.gltf" response-type="arraybuffer"/>
-        <a-asset-item id="cabinetClosedAsset" src="assets/models/CabinetClosed/ASM - PBR Metallic Roughness.gltf" response-type="arraybuffer"/>
+        <a-asset-item id="cabinetClosedAsset" src="assets/models/CabinetClosed/cabinetOpenFar.glb" response-type="arraybuffer"/>
         <a-asset-item id="clockAsset" src="assets/models/CodeObjects/clock_gltf_export.glb" response-type="arraybuffer"/>
 
         <a-asset-item id="doorAsset" src="assets/models/Doors/medicalDoor.gltf" response-type="arraybuffer"/>
@@ -146,7 +147,7 @@
       <a-image class="image" id="lungs" src="assets/models/textures/lungs.png" position="5.5 2.610 -6.896" scale="1.5 1.5 1.5" rotation="0 0 0"></a-image>
       <a-image class="image" id="calendar" src="assets/models/textures/calendar.png" position="-2.5 2.610 -6.896" scale="1.5 1.5 1.5" rotation="0 0 0"></a-image>
       <a-image class="image" id="stomach" src="assets/models/textures/stomach.png" position="2.5 2.610 -6.896" scale="1.5 1.5 1.5"></a-image>
-      <a-image class="image" id="medLabel" src="assets/models/textures/medPlaque.png" position="-4.27 0.197 -78.76" scale="1.5 0.25 0.25" crossorigin="anonymous"/></a-image>
+      <a-image class="image" id="medLabel" src="assets/models/textures/medPlaque.png" position="-4.27 0.197 -7.76" scale="1.5 0.25 0.25" crossorigin="anonymous"/></a-image>
 
       <!--sounds-->
       <a-entity id="doorOpen" sound="src: #door_open;"></a-entity>
@@ -155,6 +156,7 @@
       <a-entity id="phoneIncorrect" sound="src: #phone_incorrect;"></a-entity>
       <a-entity id="cabinetCorrect" sound="src: #cabinet_correct;"></a-entity>
       <a-entity id="cabinetIncorrect" sound="src: #cabinet_incorrect;"></a-entity>
+      <a-entity id="medsIncorrect" sound="src: #meds_incorrect;"></a-entity>
 
       <!-- room with some checkpoints-->
       <a-entity id="room"
@@ -164,9 +166,20 @@
             gltf-model="#roomLayout">
       </a-entity>
 
+
+      <a-entity id="CabinetClosed"
+        position="8.024 0.578 -0.458"
+        rotation="0 90 0"
+        scale="10 12 10"
+        gltf-model="#cabinetClosedAsset"
+        material="color: rgb(255,255,255)"
+        visible="false"
+        circles-pickup-networked>   
+      </a-entity>
+
     <!---medicines for puzzle-->  
     <a-entity id="medicine3"
-        position="7.785 1.344 -1.129"
+        position="7.785 1.520 -1.45"
         rotation="0 0 0"
         scale="10 10 10"
         gltf-model="#med1Asset"
@@ -175,7 +188,7 @@
         circles-pickup-networked>
     </a-entity>
     <a-entity id="medicine1" 
-          position="8.367 1.965 -1.210"
+          position="8.367 2.28 -1.45"
           rotation="0 0 0"
           scale="8 8 8"
           gltf-model="#med2Asset"
@@ -184,16 +197,16 @@
           circles-pickup-networked>
       </a-entity>
       <a-entity id="medicine2"
-          position="8.370 0.916 -1.182"
+          position="8.370 0.878 -1.45"
           rotation="0 90 0"
-          scale="3 3 3"
+          scale="5 3 3"
           gltf-model="#med3Asset"
           material="color: rgb(0,0,0)"
           visible="true"
           circles-pickup-networked>
       </a-entity>
       <a-entity id="medicine4"
-          position="7.515 2.592 -1.181"
+          position="7.515 3 -1.45"
           rotation="0 0 0"
           scale="2 2 1"
           gltf-model="#med4Asset"
@@ -202,27 +215,28 @@
           circles-pickup-networked>
       </a-entity>
 
+
       <!---plates for puzzle--> 
       <a-entity id="plateM1"
-          position="0 1.53 -1.140"
+          position="1.8 1.53 -1.140"
           scale="0.2 0.2 0.2"
           geometry="primitive: cylinder; height: 0.1; radius: 1"
           material="color: rgb(255,255,255)">
       </a-entity>
       <a-entity id="plateM2"
-          position="0.6 1.53 -1.140"
-          scale="0.2 0.2 0.2"
-          geometry="primitive: cylinder; height: 0.1; radius: 1"
-          material="color: rgb(255,255,255)">
-      </a-entity>
-      <a-entity id="plateM3"
           position="1.2 1.53 -1.140"
           scale="0.2 0.2 0.2"
           geometry="primitive: cylinder; height: 0.1; radius: 1"
           material="color: rgb(255,255,255)">
       </a-entity>
+      <a-entity id="plateM3"
+          position="0.6 1.53 -1.140"
+          scale="0.2 0.2 0.2"
+          geometry="primitive: cylinder; height: 0.1; radius: 1"
+          material="color: rgb(255,255,255)">
+      </a-entity>
       <a-entity id="plateM4"
-          position="1.8 1.53 -1.140"
+          position="0 1.53 -1.140"
           scale="0.2 0.2 0.2"
           geometry="primitive: cylinder; height: 0.1; radius: 1"
           material="color: rgb(255,255,255)">
@@ -238,7 +252,7 @@
     <!---other items--> 
     <a-entity id="Flask1"
         class="important" 
-        position="0.526 1.490 -6.195"
+        position="0.526 1.590 -6.195"
         rotation="0 0 0"
         scale="10 10 10"
         gltf-model="#flask1Asset"
@@ -247,7 +261,15 @@
     </a-entity>
 
     <a-entity id="coat"
-      position="1.913 1.078 2.742"
+      position="1.125 0.878 2.696"
+      rotation="0 -90 0"
+      scale="0.1 0.1 0.1"
+      gltf-model="#coatAsset"
+      material="color: rgb(0,0,0)"
+      circles-pickup-networked>
+  </a-entity>
+  <a-entity id="coat2"
+      position="1.125 0.878 3.788"
       rotation="0 -90 0"
       scale="0.1 0.1 0.1"
       gltf-model="#coatAsset"
@@ -266,7 +288,7 @@
 
     <a-entity id="Beaker"
       class="important" 
-      position="-0.68 1.4614 -6.547"
+      position="-0.68 1.581 -6.547"
       rotation="0 0 0"
       scale="10 10 10"
       gltf-model="#beakerAsset"
@@ -321,20 +343,10 @@
     <a-entity id="Cabinet"
         position="8.024 0.578 -0.974"
         rotation="0 90 0"
-        scale="10 10 10"
+        scale="12 10 10"
         gltf-model="#cabinetAsset"
         material="color: rgb(255,255,255)"
         visible="true"
-        circles-pickup-networked>   
-    </a-entity>
-
-    <a-entity id="CabinetClosed"
-        position="8.024 0.578 -0.458"
-        rotation="0 90 0"
-        scale="10 10 10"
-        gltf-model="#cabinetClosedAsset"
-        material="color: rgb(255,255,255)"
-        visible="false"
         circles-pickup-networked>   
     </a-entity>
 

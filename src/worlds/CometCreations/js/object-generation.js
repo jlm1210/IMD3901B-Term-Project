@@ -6,7 +6,7 @@ function setupObjects(){
     var phone = document.querySelector("#Phone");
     var posX = 0;
     var posZ = 0.2;
-    var posY = 0.4;
+    var posY = 0.35;
     var scale = 0.1;
     var rot = 90;
     codeManager(phone, posX, posY, posZ, scale, rot);
@@ -16,7 +16,7 @@ function setupObjects(){
     cabinet.setAttribute('class', 'inter');
     cabinet.setAttribute('circles-interactive-object', {type: "highlight", highlight_color: accessCol});
     posX = 0.1;
-    posZ = 0.1;
+    posZ = 0.2;
     posY = 0.2;
     scale = 0.05;
     rot = 90;
@@ -290,6 +290,7 @@ function codeCheck(id){
 
                     document.querySelector('#CabinetClosed').setAttribute('visible', true);
                     document.querySelector('#Cabinet').setAttribute('visible', false);
+                    document.querySelector('#Cabinet').setAttribute('position', "8 0 1");
                 }
                 
             } else { //if its wrong
