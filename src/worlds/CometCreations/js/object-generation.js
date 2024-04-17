@@ -4,7 +4,7 @@ function setupObjects(){
 
     //setup the phone and its code input UI
     var phone = document.querySelector("#Phone");
-    var posX = -0.2;
+    var posX = 0;
     var posZ = 0.2;
     var posY = 0.4;
     var scale = 0.1;
@@ -15,10 +15,10 @@ function setupObjects(){
     var cabinet = document.querySelector("#Cabinet");
     cabinet.setAttribute('class', 'inter');
     cabinet.setAttribute('circles-interactive-object', {type: "highlight", highlight_color: accessCol});
-    posX = -10;
-    posZ = 1;
-    posY = 20;
-    scale = 5;
+    posX = 0.1;
+    posZ = 0.1;
+    posY = 0.2;
+    scale = 0.05;
     rot = 90;
     codeManager(cabinet, posX, posY, posZ, scale, rot);
     codeEvents();
@@ -288,8 +288,8 @@ function codeCheck(id){
                     var sound = document.querySelector('#cabinetCorrect');
                     sound.components.sound.playSound();
 
-                    document.querySelector('#CabinetClosed').setAttribute('visible', false);
-                    document.querySelector('#Cabinet').setAttribute('visible', true);
+                    document.querySelector('#CabinetClosed').setAttribute('visible', true);
+                    document.querySelector('#Cabinet').setAttribute('visible', false);
                 }
                 
             } else { //if its wrong
