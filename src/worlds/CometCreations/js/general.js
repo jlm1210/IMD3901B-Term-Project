@@ -98,9 +98,30 @@ function startGame(){
     inter.setAttribute('raycaster', {far: '5'}, {interval: '200'}, {objects: '.inter'});  
     cam.appendChild(inter); //append it to the cursor
 
-      if(userLang.includes("fr")){
-          document.querySelector("#players").innerHTML = "JOUERS";
-      }
+    //if french is selected
+    if(userLang.includes("fr")){
+      //update UI
+        document.querySelector("#players").innerHTML = "JOUERS";
+
+        //update the posters
+        let hand = document.querySelector('#hand');
+        hand.setAttribute('src', 'assets/models/textures/hand_fr.png');
+
+        let heart = document.querySelector('#heart');
+        heart.setAttribute('src', 'assets/models/textures/heart_fr.png');
+
+        let lungs = document.querySelector('#lungs');
+        lungs.setAttribute('src', 'assets/models/textures/lungs_fr.png');
+
+        let calendar = document.querySelector('#calendar');
+        calendar.setAttribute('src', 'assets/models/textures/calendar_fr.png');
+
+        let stomach = document.querySelector('#stomach');
+        stomach.setAttribute('src', 'assets/models/textures/stomach_fr.png');
+
+        let medLabel = document.querySelector('#medLabel');
+        medLabel.setAttribute('src', 'assets/models/textures/medPlaque_fr.png');
+    }
 
     //setup color options
     var colourOp = document.querySelectorAll(".col");
