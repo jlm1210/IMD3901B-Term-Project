@@ -231,7 +231,7 @@ function startGame(){
           sound.components.sound.playSound();
           console.log("close the door");
           var doorPivot = document.querySelector("#doorParent");
-          doorPivot.setAttribute('rotation', "0 77 0");
+          doorPivot.setAttribute('rotation', "0 110 0");
           doorOpen = false;
         }  
 

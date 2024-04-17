@@ -6,7 +6,8 @@
     "HUBText": 
     {
         "Welcome": "Voici le creation VR de COMET Creations, inspirer du laboratoire medical des annees 1950!",
-        "Win": "Felicitations! Nous esperons que vous avez beaucoup appris sur les laboratoires medicaux dans les annees 1950!"
+        "Win": "Felicitations! Nous esperons que vous avez beaucoup appris sur les laboratoires medicaux dans les annees 1950!",
+        "Reset":"REINITIALISER"
     },
     "ArtifactText":
     {

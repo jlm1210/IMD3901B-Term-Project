@@ -74,7 +74,7 @@ function setupObjects(){
                 var sound = document.querySelector('#doorOpen');
                 sound.components.sound.playSound();
                 var doorPivot = document.querySelector("#doorParent2");
-                doorPivot.setAttribute('rotation', "0 90 0");
+                doorPivot.setAttribute('rotation', "0 70 0");
 
                 //remove the key from the players hand
                 var key = document.querySelector("#key");
@@ -88,6 +88,11 @@ function setupObjects(){
     //setup the welcome text
     const welcome = document.getElementById('welcome_description');
     welcome.setAttribute('circles-description', {title_text_front:'Comet Creations', description_text_front:`${jsonData.HUBText.Welcome}`, description_text_back:`${jsonData.HUBText.Welcome}`, lookAtCamera:true});
+
+    //setup reset text
+    const reset = document.getElementById('resetText');
+    reset.setAttribute('circles-description', {title_text_front:'Comet Creations', description_text_front: `${jsonData.HUBText.Reset}`, description_text_back:`${jsonData.HUBText.Reset}`, lookAtCamera:true});
+
 
     //posters
     var allImages = document.querySelectorAll(".image");
@@ -252,6 +257,8 @@ function codeCheck(id){
             if(phoneGuess === phoneCode){ //if its correct
                 for(let i = 0; i < phoneCode.length; i++){ //change the correct code to be green
                     document.querySelectorAll('.code')[phoneCode[i]].setAttribute('material', {color: 'rgb(0, 255, 0)'}, {side: 'double'});
+                    var sound = document.querySelector('#phoneCorrect');
+                    sound.components.sound.playSound();
                 }
                 //give the player the key
                 var key = document.querySelector("#key");
@@ -266,6 +273,8 @@ function codeCheck(id){
                 phoneGuess = "";
                 for(let i = 0; i < 10; i++){
                     document.querySelectorAll('.code')[i].setAttribute('material', {color: 'rgb(0, 0, 0)'}, {side: 'double'});
+                    var sound = document.querySelector('#phoneIncorrect');
+                    sound.components.sound.playSound();
                 }
             }
         }
@@ -276,12 +285,16 @@ function codeCheck(id){
                     var r = Number(cabinetCode[i]);
                     r = r + 10;
                     document.querySelectorAll('.code')[r].setAttribute('material', {color: 'rgb(0, 255, 0)'}, {side: 'double'});
+                    var sound = document.querySelector('#cabinetCorrect');
+                    sound.components.sound.playSound();
                 }
                 
             } else { //if its wrong
                 cabinetGuess = "";
                 for(let i = 10; i < 20; i++){
                     document.querySelectorAll('.code')[i].setAttribute('material', {color: 'rgb(0, 0, 0)'}, {side: 'double'});
+                    var sound = document.querySelector('#cabinetInorrect');
+                    sound.components.sound.playSound();
                 }
             }
         }

@@ -6,7 +6,8 @@
     "HUBText": 
     {
         "Welcome": "This is COMET Creations' 1950s medical lab inspired escape room VR experience!",
-        "Win": "Congratulations! We hope you learned a lot about medical labs in the 1950s!"
+        "Win": "Congratulations! We hope you learned a lot about medical labs in the 1950s!",
+        "Reset": "RESET"
     },
     "ArtifactText":
     {
