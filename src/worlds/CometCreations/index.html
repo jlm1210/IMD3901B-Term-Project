@@ -100,9 +100,9 @@
         <audio id="door_open" src="assets/models/audio/door-open.mp3" preload="auto" crossorigin="anonymous"></audio>
         <audio id="door_close" src="assets/models/audio/door_close.mp3" preload="auto" crossorigin="anonymous"></audio>
 
-        <!-- add our gltf models here             
-        <a-asset-item id="roomLayout" src="assets/models/Room/textures/BothRoomsWTexture21.gltf" response-type="arraybuffer"/>
-  --> 
+        <!-- add our gltf models here   -->             
+        <a-asset-item id="roomLayout" src="assets/models/RoomGroup/BothRoomsWTexture31.gltf" response-type="arraybuffer"/>
+
        <!-- objects-->
 
         <a-asset-item id="flask1Asset" src="assets/models/Room/textures/flask1.gltf" response-type="arraybuffer"/>
@@ -141,9 +141,9 @@
 
       <!-- room with some checkpoints-->
       <a-entity id="room"
-            position="3.5 -0.4 2.485"
-            rotation="0 0 0"
-            scale="2 2 2"
+            position="3.5 -0.95 2.485"
+            rotation="0 90 0"
+            scale="0.5 0.5 0.5"
             gltf-model="#roomLayout">
       </a-entity>
 
@@ -248,11 +248,11 @@
   </a-entity>
 
   <!--outer door to medlab-->
-    <a-entity id="doorParent" position="-0.48 0.483 4.599">
+    <a-entity id="doorParent" position="0.660 0.483 1.256">
       <a-entity id="medDoor"
             position="0 0 1.3"
             rotation="0 193 0"
-            scale="10 14 20"
+            scale="20 20 15"
             gltf-model="#doorAsset"
             material="color: rgb(0,0,0)"
             circles-pickup-networked>
@@ -260,11 +260,11 @@
     </a-entity>
 
     <!--inner door inside of medlab-->
-    <a-entity id="doorParent2" position="0 0 0">
+    <a-entity id="doorParent2" position="3.360 0.483 -2.990">
       <a-entity id="medDoor2"
             position="0 0 0"
             rotation="0 0 0"
-            scale="10 14 20"
+            scale="20 20 15"
             gltf-model="#doorAsset"
             material="color: rgb(0,0,0)"
             circles-pickup-networked>
@@ -291,10 +291,10 @@
     </a-entity>
 
       <!--room trigger box-->
-      <a-entity id="labTrigger" position="0.111 1.498 5.411" scale="2 2 1" geometry="primitive:box; width:1; height: 1; depth:1;" material="opacity: 0;"></a-entity>
+      <a-entity id="labTrigger" position="1.864 1.498 0.897" scale="2 2 1" geometry="primitive:box; width:1; height: 1; depth:1;" material="opacity: 0;"></a-entity>
 
       <!--teleport points-->
-      <a-entity circles-spawnpoint class="check" circles-checkpoint position="-8.79 0.592 9.588"></a-entity>
+      <a-entity circles-spawnpoint class="check" circles-checkpoint position="-86.43 0.592 23.521"></a-entity>
       <a-entity class="check" circles-checkpoint position="-4.140 0.592 9.973"></a-entity>
       <a-entity class="check" circles-checkpoint position="0.369 0.592 8.294"></a-entity>
       <a-entity class="check" circles-checkpoint position="0.279 0.592 2.372"></a-entity>
@@ -305,7 +305,7 @@
       <a-entity class="check" circles-checkpoint position="2.161 0.592 -6.007"></a-entity>
       <a-entity class="check" circles-checkpoint position="4.451 0.592 -8.841"></a-entity>
 
-      <a-entity id="welcome_description" position="-10.3 2 8.648" rotation="0 0 0"></a-entity>
+      <a-entity id="welcome_description" position="-6.18 2 16.423" rotation="0 0 0"></a-entity>
 
       <!-- sky and lights -->
       <a-entity id="sunlight" position="0 20 0" rotation="40 0 0" 
