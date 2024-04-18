@@ -15,6 +15,7 @@ const phoneCode = "0915";
 const cabinetCode = "1234";
 var phoneGuess = "";
 var cabinetGuess = "";
+var medScales = [{x: 8, y: 8, z: 8},{x: 5, y: 3, z: 3},{x: 10, y: 10, z: 10},{x: 2, y: 2, z: 1}];
 
 
 window.onload = (event) => {
@@ -154,14 +155,16 @@ function startGame(){
 
         for(let i = 0; i < 4; i++){
             let med = document.querySelector(`#medicine${i+1}`);
-            //let medScale = med.getAttribute('scale');
+            let medScale = med.getAttribute('scale');
            // med.setAttribute('scale', `${medScale.x/5}, ${medScale.y/5}, ${medScale.z/5}`);
             med.flushToDOM();
             let copy = med.cloneNode();
             med.parentNode.removeChild(med);
             document.querySelector('a-scene').appendChild(copy);
             copy.setAttribute('position', `${i-0.6} 1.53 -0.9`);
-            //copy.setAttribute('scale', `${medScale.x / 5}, ${medScale.y / 5}, ${medScale.z / 5}`);
+            console.log(medScale);
+            console.log(medScales[i]);
+            copy.setAttribute('scale', `${medScales[i].x}, ${medScales[i].y}, ${medScales[i].z}`);
 
 
             //add a click function to pickup
