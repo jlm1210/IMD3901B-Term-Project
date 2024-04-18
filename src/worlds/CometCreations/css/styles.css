@@ -14,6 +14,7 @@ h1 {
     position: fixed;
     width: 100vw;
     height: 100vh;
+    box-sizing: border-box;
     background-color: white;
     z-index: 1;
     cursor: pointer;
@@ -23,6 +24,10 @@ h1 {
   
   #secondUI, #waiting {
   display: none;
+  }
+
+  #secondUI {
+    overflow: scroll;
   }
 
   #firstUI {
@@ -45,6 +50,7 @@ h1 {
     font-family: "Roboto", sans-serif;
     color: black;
     margin: 0;
+    margin-bottom: 0;
   }
 
   h6 {
@@ -53,7 +59,6 @@ h1 {
   }
 
   .objectText{
-    padding-top: 15px;
     display:flex;
   }
 
@@ -285,4 +290,24 @@ h3 {
   left: 10px;
   top: 10px;
   background-color:white;
+}
+
+@media only screen and (max-aspect-ratio:1/1) {
+  .panel {
+      width: calc(100dvw - 20px);
+      box-sizing: border-box;
+      height: auto !important; 
+      left: auto;
+      top: auto;
+      position: relative;
+      margin-bottom: 10px;
+      margin-left: 10px;
+      margin-right: 10px;
+  }
+
+  #gameUI {
+      width: 100%;    
+      position: absolute;
+      bottom: 0;
+  }
 }
